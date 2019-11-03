@@ -1,5 +1,5 @@
 //@flow
-import { SUCCESS_GET_GENRES } from '../utils/action.types';
+import { SUCCESS_GET_GENRES, GENRES_IS_LOADING } from '../utils/action.types';
 
 const initialState = {
   list: [],
@@ -11,7 +11,12 @@ export const genres = (state = initialState, action) => {
     case SUCCESS_GET_GENRES:
       return {
         ...state,
-        genres: action.genres
+        list: action.list
+      };
+    case GENRES_IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading
       };
     default:
       return state;
