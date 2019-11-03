@@ -1,0 +1,1 @@
+export const SUCCESS_GET_GENRES = "SUCCESS_GET_GENRES"
