@@ -3,8 +3,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from 'redux-thunk'
 
 import { genres } from './src/reducers/genres'
+import { popular } from './src/reducers/popular'
 
-const reducer = combineReducers({ genres })
+const reducer = combineReducers({ genres, popular })
 
 const enhancer = applyMiddleware(thunk);
 
