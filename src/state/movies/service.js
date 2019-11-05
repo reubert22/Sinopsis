@@ -24,3 +24,14 @@ export const getPopular = () => async (dispatch) => {
     dispatch(actions.isLoadingPopular(false))
   }
 }
+
+export const getPlaying = () => async (dispatch) => {
+  try {
+    dispatch(actions.isLoadingPlaying(true))
+    const response = await repository.getNowPlaying()
+    dispatch(actions.successGetPlaying(response.data.results))
+    dispatch(actions.isLoadingPlaying(false))
+  } catch (e) {
+    dispatch(actions.isLoadingPlaying(false))
+  }
+}

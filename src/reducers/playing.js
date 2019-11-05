@@ -1,18 +1,18 @@
-import { SUCCESS_GET_GENRES, GENRES_IS_LOADING } from '../utils/action.types'
+import { SUCCESS_GET_PLAYING, PLAYING_IS_LOADING } from '../utils/action.types'
 
 const initialState = {
   list: [],
   isLoading: false
 };
 
-export const genres = (state = initialState, action) => {
+export const playing = (state = initialState, action) => {
   switch (action.type) {
-    case SUCCESS_GET_GENRES:
+    case SUCCESS_GET_PLAYING:
       return {
         ...state,
         list: action.list
       };
-    case GENRES_IS_LOADING:
+    case PLAYING_IS_LOADING:
       return {
         ...state,
         isLoading: action.isLoading

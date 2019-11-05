@@ -4,8 +4,9 @@ import thunk from 'redux-thunk'
 
 import { genres } from './src/reducers/genres'
 import { popular } from './src/reducers/popular'
+import { playing } from './src/reducers/playing'
 
-const reducer = combineReducers({ genres, popular })
+const reducer = combineReducers({ genres, popular, playing })
 
 const enhancer = applyMiddleware(thunk);
 

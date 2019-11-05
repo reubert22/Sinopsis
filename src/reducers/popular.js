@@ -1,5 +1,4 @@
-//@flow
-import { SUCCESS_GET_POPULAR, SUCCESS_GET_MOST_POPULAR, POPULAR_IS_LOADING } from '../utils/action.types';
+import { SUCCESS_GET_POPULAR, SUCCESS_GET_MOST_POPULAR, POPULAR_IS_LOADING } from '../utils/action.types'
 
 const initialState = {
   list: [],

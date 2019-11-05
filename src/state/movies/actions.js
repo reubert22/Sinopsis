@@ -15,6 +15,11 @@ export const successGetMostPopular = mostPopular => ({
   mostPopular,
 });
 
+export const successGetPlaying = list => ({
+  type: types.SUCCESS_GET_PLAYING,
+  list,
+});
+
 export const isLoadingGenres = isLoading => ({
   type: types.GENRES_IS_LOADING,
   isLoading
@@ -22,5 +27,10 @@ export const isLoadingGenres = isLoading => ({
 
 export const isLoadingPopular = isLoading => ({
   type: types.POPULAR_IS_LOADING,
+  isLoading
+})
+
+export const isLoadingPlaying = isLoading => ({
+  type: types.PLAYING_IS_LOADING,
   isLoading
 })
