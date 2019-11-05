@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, SafeAreaView, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import * as moviesService from '../../state/movies/service'
-import { poster400, posterOriginal } from '../../utils/constants'
+import { posterOriginal } from '../../utils/constants'
 import FastImage from 'react-native-fast-image'
 import { ScrollView, BaseButton } from 'react-native-gesture-handler'
 import ItemTitle from '../../components/shared/Title';
