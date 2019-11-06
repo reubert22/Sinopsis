@@ -2,11 +2,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from 'redux-thunk'
 
-import { genres } from './src/reducers/genres'
-import { popular } from './src/reducers/popular'
-import { playing } from './src/reducers/playing'
+import { movies } from './src/reducers/movies'
 
-const reducer = combineReducers({ genres, popular, playing })
+const reducer = combineReducers({ movies })
 
 const enhancer = applyMiddleware(thunk);
 
