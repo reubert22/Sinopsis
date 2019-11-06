@@ -16,8 +16,6 @@ export const getPopular = () => async (dispatch) => {
   try {
     dispatch(actions.isLoadingPopular(true))
     const response = await repository.getPopular()
-    const mostPopular = Math.floor(Math.random() * response.data.results.length);
-    dispatch(actions.successGetMostPopular(response.data.results[mostPopular]))
     dispatch(actions.successGetPopular(response.data.results))
     dispatch(actions.isLoadingPopular(false))
   } catch (e) {
@@ -33,5 +31,41 @@ export const getPlaying = () => async (dispatch) => {
     dispatch(actions.isLoadingPlaying(false))
   } catch (e) {
     dispatch(actions.isLoadingPlaying(false))
+  }
+}
+
+export const getTopRated = () => async (dispatch) => {
+  try {
+    dispatch(actions.isLoadingTopRated(true))
+    const response = await repository.getTopRated()
+    dispatch(actions.successGetTopRated(response.data.results))
+    dispatch(actions.isLoadingTopRated(false))
+  } catch (e) {
+    dispatch(actions.isLoadingTopRated(false))
+
+  }
+}
+
+export const getUpcoming = () => async (dispatch) => {
+  try {
+    dispatch(actions.isLoadingUpcoming(true))
+    const response = await repository.getUpcoming()
+    dispatch(actions.successGetUpcoming(response.data.results))
+    dispatch(actions.isLoadingUpcoming(false))
+  } catch (e) {
+    dispatch(actions.isLoadingUpcoming(false))
+
+  }
+}
+
+export const getLatest = () => async (dispatch) => {
+  try {
+    dispatch(actions.isLoadingLatest(true))
+    const response = await repository.getLatest()
+    dispatch(actions.successGetLatest(response.data))
+    dispatch(actions.isLoadingLatest(false))
+  } catch (e) {
+    dispatch(actions.isLoadingLatest(false))
+
   }
 }

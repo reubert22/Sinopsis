@@ -5,15 +5,15 @@ import { BaseButton } from 'react-native-gesture-handler'
 import { posterOriginal } from '../../../utils/constants'
 import { styles } from './style'
 
-const Header = ({ mostPopular, popularLoading, onDetails, onFavorite, onTrailer }) => (
+const Header = ({ latest, latestLoading, onDetails, onFavorite, onTrailer }) => (
   <View style={styles.container}>
-    {popularLoading
+    {latestLoading
       ? <Text>•••</Text>
       :
       <FastImage
         style={styles.image}
         source={{
-          uri: `${posterOriginal}${mostPopular.poster_path}`,
+          uri: `${posterOriginal}${latest.poster_path}`,
           priority: FastImage.priority.normal,
         }}
         resizeMode={FastImage.resizeMode.stretch}

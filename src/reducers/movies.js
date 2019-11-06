@@ -12,7 +12,18 @@ const initialState = {
   popular: {
     list: [],
     isLoading: false,
-    mostPopular: {}
+  },
+  topRated: {
+    list: [],
+    isLoading: false
+  },
+  upcoming: {
+    list: [],
+    isLoading: false
+  },
+  latest: {
+    latest: {},
+    isLoading: false
   }
 };
 
@@ -45,15 +56,43 @@ export const movies = (state = initialState, action) => {
         ...state,
         popular: { ...state.popular, list: action.list }
       };
-    case types.SUCCESS_GET_MOST_POPULAR:
-      return {
-        ...state,
-        popular: { ...state.popular, mostPopular: action.mostPopular }
-      };
     case types.POPULAR_IS_LOADING:
       return {
         ...state,
         popular: { ...state.popular, isLoading: action.isLoading }
+      };
+
+    case types.SUCCESS_GET_TOP_RATED:
+      return {
+        ...state,
+        topRated: { ...state.topRated, list: action.list }
+      };
+    case types.TOP_RATED_IS_LOADING:
+      return {
+        ...state,
+        topRated: { ...state.topRated, isLoading: action.isLoading }
+      };
+
+    case types.SUCCESS_GET_UPCOMING:
+      return {
+        ...state,
+        upcoming: { ...state.upcoming, list: action.list }
+      };
+    case types.UPCOMING_IS_LOADING:
+      return {
+        ...state,
+        upcoming: { ...state.upcoming, isLoading: action.isLoading }
+      };
+
+    case types.SUCCESS_GET_LATEST:
+      return {
+        ...state,
+        latest: { ...state.latest, latest: action.latest }
+      };
+    case types.LATEST_IS_LOADING:
+      return {
+        ...state,
+        latest: { ...state.latest, isLoading: action.isLoading }
       };
     default:
       return state;

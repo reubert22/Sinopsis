@@ -1,29 +1,34 @@
 import React, { useEffect } from 'react';
+import { ScrollView } from 'react-native-gesture-handler'
 import { View, SafeAreaView } from 'react-native'
 import { connect } from 'react-redux'
+
 import * as moviesService from '../../state/movies/service'
-import { ScrollView } from 'react-native-gesture-handler'
+import GridItem from '../../components/home/GridItem'
 import ItemTitle from '../../components/shared/Title'
 import Popular from '../../components/home/Popular'
-import GridItem from '../../components/home/GridItem'
 import Header from '../../components/home/Header'
 
-const HomeScreen = ({ navigation,
-  getGenres,
-  genresList,
-  genresLoading,
+const HomeScreen = ({
+  navigation,
   getPopular,
-  mostPopular,
-  popularLoading,
   popularList,
   getPlaying,
   playingList,
-  playingLoading
+  getTopRated,
+  topRatedList,
+  upcomingList,
+  getUpcoming,
+  getLatest,
+  latest,
+  latestLoading
 }) => {
   useEffect(() => {
-    getGenres()
+    getLatest()
     getPopular()
     getPlaying()
+    getTopRated()
+    getUpcoming()
   }, [])
 
   return (
@@ -31,8 +36,8 @@ const HomeScreen = ({ navigation,
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView style={{ flex: 1, backgroundColor: '#000105' }}>
           <Header
-            mostPopular={mostPopular}
-            popularLoading={popularLoading}
+            latest={latest}
+            latestLoading={latestLoading}
             onDetails={() => { }}
             onFavorite={() => { }}
             onTrailer={() => { }}
@@ -47,6 +52,16 @@ const HomeScreen = ({ navigation,
           {playingList.length !== 0 && (
             <GridItem data={playingList} />
           )}
+
+          <ItemTitle title="Mais votados" />
+          {topRatedList.length !== 0 && (
+            <GridItem data={topRatedList} />
+          )}
+
+          <ItemTitle title="Estão por vir" />
+          {upcomingList.length !== 0 && (
+            <GridItem data={upcomingList} />
+          )}
         </ScrollView>
       </SafeAreaView>
     </View >
@@ -58,10 +73,15 @@ const mapStateToProps = state => ({
   genresList: state.movies.genres.list,
   genresLoading: state.movies.genres.isLoading,
   popularList: state.movies.popular.list,
-  mostPopular: state.movies.popular.mostPopular,
   popularLoading: state.movies.popular.isLoading,
   playingList: state.movies.playing.list,
   playingLoading: state.movies.playing.isLoading,
+  topRatedList: state.movies.topRated.list,
+  topRatedLoading: state.movies.topRated.isLoading,
+  upcomingList: state.movies.upcoming.list,
+  upcomingLoading: state.movies.upcoming.isLoading,
+  latest: state.movies.latest.latest,
+  latestLoading: state.movies.latest.isLoading,
 })
 
 /* istanbul ignore next */
@@ -69,6 +89,9 @@ const mapDispatchToProps = {
   getGenres: moviesService.getGenres,
   getPopular: moviesService.getPopular,
   getPlaying: moviesService.getPlaying,
+  getTopRated: moviesService.getTopRated,
+  getUpcoming: moviesService.getUpcoming,
+  getLatest: moviesService.getLatest,
 }
 
 export default connect(
