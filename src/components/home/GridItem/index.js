@@ -16,7 +16,10 @@ const GridItem = ({ data }) => {
           {item.poster_path
             ? (
               <>
-                <BaseButton style={styles.buttonImg}>
+                <View style={{
+                  width: 100,
+                  height: 200,
+                }}>
                   <FastImage
                     style={styles.buttonImg}
                     source={{
@@ -25,15 +28,15 @@ const GridItem = ({ data }) => {
                     }}
                     resizeMode={FastImage.resizeMode.stretch}
                   />
-                </BaseButton>
-                <View style={styles.containerTitle}>
+                </View>
+                {/* <View style={styles.containerTitle}>
                   <Text
                     style={styles.title}
                     numberOfLines={2}
                   >
                     {item.title}
                   </Text>
-                </View>
+                </View> */}
               </>
             ) : (
               <BaseButton style={styles.buttonSeeMore}>

@@ -5,13 +5,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    marginHorizontal: 5,
+    marginHorizontal: 6,
     width: 100,
     marginVertical: 10
   },
   buttonImg: {
     width: 100,
-    height: 120
+    height: 170,
   },
   containerTitle: {
     height: 30,

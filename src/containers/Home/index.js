@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler'
-import { View, SafeAreaView } from 'react-native'
+import { View, SafeAreaView, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import * as moviesService from '../../state/movies/service'
@@ -19,51 +19,60 @@ const HomeScreen = ({
   topRatedList,
   upcomingList,
   getUpcoming,
-  getLatest,
   latest,
-  latestLoading
+  latestLoading,
+  getMovieTrailer
 }) => {
   useEffect(() => {
-    getLatest()
     getPopular()
     getPlaying()
     getTopRated()
     getUpcoming()
   }, [])
 
+  const handleTrailer = (movieId) => {
+    getMovieTrailer(movieId).then(({ key }) => {
+      return navigation.navigate('Player', { selectedMovie: key })
+    })
+  }
+
+  const handleDetails = (selectedMovie) => {
+    return navigation.navigate('Details', { selectedMovie })
+  }
+
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView style={{ flex: 1, backgroundColor: '#000105' }}>
-          <Header
-            latest={latest}
-            latestLoading={latestLoading}
-            onDetails={() => { }}
-            onFavorite={() => { }}
-            onTrailer={() => { }}
-          />
+      <SafeAreaView style={{ flex: 0, backgroundColor: '#000105' }} forceInset={{ bottom: 'never' }} />
+      <ScrollView style={{ flex: 1, backgroundColor: '#000105' }}>
 
-          <ItemTitle title="Mais populares" />
-          {popularList.length !== 0 && (
-            <Popular popularList={popularList} />
-          )}
+        <Header
+          latest={latest}
+          latestLoading={latestLoading}
+          onDetails={handleDetails}
+          onFavorite={() => { }}
+          onTrailer={handleTrailer}
+        />
 
-          <ItemTitle title="Sendo visto no momento" />
-          {playingList.length !== 0 && (
-            <GridItem data={playingList} />
-          )}
+        <ItemTitle title="Mais populares" />
+        {popularList.length !== 0 && (
+          <Popular popularList={popularList} handleDetails={handleDetails} />
+        )}
 
-          <ItemTitle title="Mais votados" />
-          {topRatedList.length !== 0 && (
-            <GridItem data={topRatedList} />
-          )}
+        <ItemTitle title="Sendo visto no momento" />
+        {playingList.length !== 0 && (
+          <GridItem data={playingList} handleDetails={handleDetails} />
+        )}
 
-          <ItemTitle title="Estão por vir" />
-          {upcomingList.length !== 0 && (
-            <GridItem data={upcomingList} />
-          )}
-        </ScrollView>
-      </SafeAreaView>
+        <ItemTitle title="Mais votados" />
+        {topRatedList.length !== 0 && (
+          <GridItem data={topRatedList} handleDetails={handleDetails} />
+        )}
+
+        <ItemTitle title="Estão por vir" />
+        {upcomingList.length !== 0 && (
+          <GridItem data={upcomingList} handleDetails={handleDetails} />
+        )}
+      </ScrollView>
     </View >
   )
 }
@@ -91,7 +100,7 @@ const mapDispatchToProps = {
   getPlaying: moviesService.getPlaying,
   getTopRated: moviesService.getTopRated,
   getUpcoming: moviesService.getUpcoming,
-  getLatest: moviesService.getLatest,
+  getMovieTrailer: moviesService.getMovieTrailer,
 }
 
 export default connect(

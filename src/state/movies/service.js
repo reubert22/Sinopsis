@@ -17,6 +17,8 @@ export const getPopular = () => async (dispatch) => {
     dispatch(actions.isLoadingPopular(true))
     const response = await repository.getPopular()
     dispatch(actions.successGetPopular(response.data.results))
+    const latestOfPopular = Math.floor(Math.random() * response.data.results.length);
+    dispatch(actions.successGetLatest(response.data.results[latestOfPopular]))
     dispatch(actions.isLoadingPopular(false))
   } catch (e) {
     dispatch(actions.isLoadingPopular(false))
@@ -54,18 +56,19 @@ export const getUpcoming = () => async (dispatch) => {
     dispatch(actions.isLoadingUpcoming(false))
   } catch (e) {
     dispatch(actions.isLoadingUpcoming(false))
-
   }
 }
 
-export const getLatest = () => async (dispatch) => {
+export const getMovieTrailer = (movieId) => async (dispatch) => {
   try {
     dispatch(actions.isLoadingLatest(true))
-    const response = await repository.getLatest()
-    dispatch(actions.successGetLatest(response.data))
+    const response = await repository.getMovieTrailer(movieId)
     dispatch(actions.isLoadingLatest(false))
+    if (response.data.results.length !== 0) {
+      return response.data.results[0]
+    }
+    return false
   } catch (e) {
     dispatch(actions.isLoadingLatest(false))
-
   }
 }

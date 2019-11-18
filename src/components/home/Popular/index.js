@@ -6,14 +6,14 @@ import { View, Text } from 'react-native'
 import { poster500 } from '../../../utils/constants'
 import { styles } from './style'
 
-const Popular = ({ popularList }) => {
+const Popular = ({ popularList, handleDetails }) => {
   return (
     <FlatList
       data={popularList}
       horizontal
       renderItem={({ item }) => (
         <View style={styles.containerItems}>
-          <BaseButton style={styles.button}>
+          <BaseButton style={styles.button} onPress={() => handleDetails(item)}>
             <FastImage
               style={styles.image}
               source={{

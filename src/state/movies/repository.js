@@ -22,3 +22,6 @@ export const getLatest = () =>
 export const getSimilar = (id) =>
   apiClient.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${apiKey}&language=pt-BR&page=1
   `)
+
+export const getMovieTrailer = (movieId) =>
+  apiClient.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`)
