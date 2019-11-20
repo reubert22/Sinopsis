@@ -24,7 +24,9 @@ const initialState = {
   latest: {
     latest: {},
     isLoading: false
-  }
+  },
+  selected: {},
+  isLoadingTrailer: false
 };
 
 export const movies = (state = initialState, action) => {
@@ -93,6 +95,22 @@ export const movies = (state = initialState, action) => {
       return {
         ...state,
         latest: { ...state.latest, isLoading: action.isLoading }
+      };
+    case types.SUCCESS_SELECT_MOVIE:
+      return {
+        ...state,
+        selected: action.selected
+      };
+    case types.SUCCESS_ID_SELECTED_MOVIE:
+      console.log('action', action.videoId)
+      return {
+        ...state,
+        selected: { ...state.selected, videoId: action.videoId }
+      };
+    case types.TRAILER_IS_LOADING:
+      return {
+        ...state,
+        isLoadingTrailer: action.isLoadingTrailer
       };
     default:
       return state;

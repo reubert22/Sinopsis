@@ -1,52 +1,39 @@
 import React from 'react'
 import { FlatList, BaseButton } from 'react-native-gesture-handler'
 import FastImage from 'react-native-fast-image'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 
 import { poster500 } from '../../../utils/constants'
 import { styles } from './style'
 
-const GridItem = ({ data }) => {
+const GridItem = ({ data, handleDetails, fetchMore }) => {
   return (
     <FlatList
-      data={[...data, { title: 'Ver Mais' }]}
+      data={data}
       horizontal
       renderItem={({ item }) => (
         <View style={styles.containerItems}>
-          {item.poster_path
-            ? (
-              <>
-                <View style={{
-                  width: 100,
-                  height: 200,
-                }}>
-                  <FastImage
-                    style={styles.buttonImg}
-                    source={{
-                      uri: `${poster500}${item.poster_path}`,
-                      priority: FastImage.priority.normal,
-                    }}
-                    resizeMode={FastImage.resizeMode.stretch}
-                  />
-                </View>
-                {/* <View style={styles.containerTitle}>
-                  <Text
-                    style={styles.title}
-                    numberOfLines={2}
-                  >
-                    {item.title}
-                  </Text>
-                </View> */}
-              </>
-            ) : (
-              <BaseButton style={styles.buttonSeeMore}>
-                <Text style={styles.plusTxt}>+</Text>
-                <Text style={styles.seeMoreTxt}>Ver mais</Text>
-              </BaseButton>
-            )}
+          <BaseButton
+            style={{
+              width: 150,
+              height: 200,
+            }}
+            onPress={() => handleDetails(item)}
+          >
+            <FastImage
+              style={styles.buttonImg}
+              source={{
+                uri: `${poster500}${item.poster_path}`,
+                priority: FastImage.priority.normal,
+              }}
+              resizeMode={FastImage.resizeMode.stretch}
+            />
+          </BaseButton>
         </View>
       )}
       keyExtractor={item => `${item.id}-popular-btn`}
+      onEndReached={fetchMore}
+      showsHorizontalScrollIndicator={false}
     />
   )
 }

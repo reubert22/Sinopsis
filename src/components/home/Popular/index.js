@@ -23,14 +23,6 @@ const Popular = ({ popularList, handleDetails }) => {
               resizeMode={FastImage.resizeMode.stretch}
             />
           </BaseButton>
-          <View style={styles.containerTitle}>
-            <Text
-              style={styles.title}
-              numberOfLines={2}
-            >
-              {item.title}
-            </Text>
-          </View>
         </View>
       )}
       keyExtractor={item => `${item.id}-popular-btn`}

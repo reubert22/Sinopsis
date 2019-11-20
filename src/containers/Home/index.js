@@ -4,10 +4,12 @@ import { View, SafeAreaView, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import * as moviesService from '../../state/movies/service'
+import * as moviesAction from '../../state/movies/actions'
 import GridItem from '../../components/home/GridItem'
 import ItemTitle from '../../components/shared/Title'
 import Popular from '../../components/home/Popular'
 import Header from '../../components/home/Header'
+import { backGroundColor } from '../../utils/constants';
 
 const HomeScreen = ({
   navigation,
@@ -20,8 +22,7 @@ const HomeScreen = ({
   upcomingList,
   getUpcoming,
   latest,
-  latestLoading,
-  getMovieTrailer
+  successSelectMovie
 }) => {
   useEffect(() => {
     getPopular()
@@ -30,47 +31,43 @@ const HomeScreen = ({
     getUpcoming()
   }, [])
 
-  const handleTrailer = (movieId) => {
-    getMovieTrailer(movieId).then(({ key }) => {
-      return navigation.navigate('Player', { selectedMovie: key })
-    })
+  const handleSelectedMovie = (selectedMovie) => {
+    successSelectMovie(selectedMovie)
+    return navigation.navigate('Details')
   }
 
-  const handleDetails = (selectedMovie) => {
-    return navigation.navigate('Details', { selectedMovie })
+  const handleFetchMore = (type) => {
+    console.log('should fetch more: ', type)
   }
 
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView style={{ flex: 0, backgroundColor: '#000105' }} forceInset={{ bottom: 'never' }} />
-      <ScrollView style={{ flex: 1, backgroundColor: '#000105' }}>
+      <SafeAreaView style={{ flex: 0, backgroundColor: backGroundColor }} />
+      <ScrollView style={{ flex: 1, backgroundColor: backGroundColor }}>
 
         <Header
           latest={latest}
-          latestLoading={latestLoading}
-          onDetails={handleDetails}
-          onFavorite={() => { }}
-          onTrailer={handleTrailer}
+          onDetails={handleSelectedMovie}
         />
 
-        <ItemTitle title="Mais populares" />
+        <ItemTitle title="Most popular" />
         {popularList.length !== 0 && (
-          <Popular popularList={popularList} handleDetails={handleDetails} />
+          <Popular popularList={popularList} handleDetails={handleSelectedMovie} />
         )}
 
-        <ItemTitle title="Sendo visto no momento" />
+        <ItemTitle title="Playing now" />
         {playingList.length !== 0 && (
-          <GridItem data={playingList} handleDetails={handleDetails} />
+          <GridItem data={playingList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('playing')} />
         )}
 
-        <ItemTitle title="Mais votados" />
+        <ItemTitle title="Top rated" />
         {topRatedList.length !== 0 && (
-          <GridItem data={topRatedList} handleDetails={handleDetails} />
+          <GridItem data={topRatedList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('topRated')} />
         )}
 
-        <ItemTitle title="Estão por vir" />
+        <ItemTitle title="Upcoming" />
         {upcomingList.length !== 0 && (
-          <GridItem data={upcomingList} handleDetails={handleDetails} />
+          <GridItem data={upcomingList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('upcoming')} />
         )}
       </ScrollView>
     </View >
@@ -101,6 +98,7 @@ const mapDispatchToProps = {
   getTopRated: moviesService.getTopRated,
   getUpcoming: moviesService.getUpcoming,
   getMovieTrailer: moviesService.getMovieTrailer,
+  successSelectMovie: moviesAction.successSelectMovie
 }
 
 export default connect(

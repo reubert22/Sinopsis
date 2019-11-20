@@ -31,6 +31,16 @@ export const successGetLatest = latest => ({
 });
 
 // ---- //
+export const successSelectMovie = selected => ({
+  type: types.SUCCESS_SELECT_MOVIE,
+  selected
+})
+
+export const successIdSelectedMovie = videoId => ({
+  type: types.SUCCESS_ID_SELECTED_MOVIE,
+  videoId
+})
+// ---- //
 export const isLoadingGenres = isLoading => ({
   type: types.GENRES_IS_LOADING,
   isLoading
@@ -59,4 +69,9 @@ export const isLoadingUpcoming = isLoading => ({
 export const isLoadingLatest = isLoading => ({
   type: types.LATEST_IS_LOADING,
   isLoading
+})
+
+export const isLoadingTrailer = isLoadingTrailer => ({
+  type: types.TRAILER_IS_LOADING,
+  isLoadingTrailer
 })

@@ -61,14 +61,11 @@ export const getUpcoming = () => async (dispatch) => {
 
 export const getMovieTrailer = (movieId) => async (dispatch) => {
   try {
-    dispatch(actions.isLoadingLatest(true))
+    dispatch(actions.isLoadingTrailer(true))
     const response = await repository.getMovieTrailer(movieId)
-    dispatch(actions.isLoadingLatest(false))
-    if (response.data.results.length !== 0) {
-      return response.data.results[0]
-    }
-    return false
+    dispatch(actions.isLoadingTrailer(false))
+    dispatch(actions.successIdSelectedMovie(response.data.results[0].key))
   } catch (e) {
-    dispatch(actions.isLoadingLatest(false))
+    dispatch(actions.isLoadingTrailer(false))
   }
 }

@@ -3,7 +3,6 @@ import { createStackNavigator } from 'react-navigation-stack'
 
 import HomeScreen from './src/containers/Home'
 import DetailsScreen from './src/containers/Details'
-import Player from './src/containers/Player'
 
 const AppNavigator = createAppContainer(createStackNavigator({
   Home: {
@@ -11,10 +10,7 @@ const AppNavigator = createAppContainer(createStackNavigator({
   },
   Details: {
     screen: DetailsScreen,
-  },
-  Player: {
-    screen: Player,
-    navigationOptions: { header: null, tabBarVisible: false }
+    navigationOptions: { header: null }
   }
 },
   {

@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native'
+import { white } from '../../../utils/constants';
 
 export const styles = StyleSheet.create({
   containerTitle: {
     paddingHorizontal: 10
   },
   title: {
-    color: '#6bf6ff',
+    color: white,
     fontFamily: 'Avenir',
     fontSize: 20,
     fontWeight: 'bold'

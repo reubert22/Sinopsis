@@ -5,19 +5,20 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    marginHorizontal: 6,
+    marginHorizontal: 15,
     width: 100,
-    marginVertical: 10
+    marginTop: 10,
+    marginBottom: 5
   },
   buttonImg: {
-    width: 100,
+    width: 120,
     height: 170,
   },
   containerTitle: {
     height: 30,
     paddingVertical: 5
   },
-  title: { color: '#6bf6ff' },
+  title: { color: '#5cd662' },
   buttonSeeMore: {
     width: 100,
     height: 120,
