@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView } from 'react-native-gesture-handler'
-import { View, SafeAreaView, Text } from 'react-native'
+import { View, SafeAreaView } from 'react-native'
 import { connect } from 'react-redux'
 
 import * as moviesService from '../../state/movies/service'

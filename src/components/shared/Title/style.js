@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   title: {
     color: white,
     fontFamily: 'Avenir',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold'
   }
 });

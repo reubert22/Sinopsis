@@ -5,18 +5,19 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    marginHorizontal: 10,
-    width: 100,
-    marginVertical: 30
-  },
-  button: {
+    marginHorizontal: 7,
     width: 100,
     height: 100,
+    marginVertical: 15,
+  },
+  button: {
+    width: '100%',
+    height: '100%',
     borderRadius: 50
   },
   image: {
-    width: 100,
-    height: 100,
+    width: '100%',
+    height: '100%',
     borderRadius: 50,
     borderColor: '#fff',
     marginBottom: 10,

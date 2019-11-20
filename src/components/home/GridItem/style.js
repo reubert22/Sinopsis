@@ -3,16 +3,18 @@ import { StyleSheet } from 'react-native'
 export const styles = StyleSheet.create({
   containerItems: {
     alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    marginHorizontal: 15,
+    marginHorizontal: 8,
     width: 100,
     marginTop: 10,
     marginBottom: 5
   },
+  picture: {
+    width: '100%',
+    height: '100%',
+  },
   buttonImg: {
-    width: 120,
-    height: 170,
+    width: 110,
+    height: 150,
   },
   containerTitle: {
     height: 30,

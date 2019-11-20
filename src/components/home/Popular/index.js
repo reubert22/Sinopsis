@@ -26,6 +26,7 @@ const Popular = ({ popularList, handleDetails }) => {
         </View>
       )}
       keyExtractor={item => `${item.id}-popular-btn`}
+      showsHorizontalScrollIndicator={false}
     />
   )
 }

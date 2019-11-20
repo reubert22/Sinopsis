@@ -44,7 +44,6 @@ export const getTopRated = () => async (dispatch) => {
     dispatch(actions.isLoadingTopRated(false))
   } catch (e) {
     dispatch(actions.isLoadingTopRated(false))
-
   }
 }
 
@@ -67,5 +66,16 @@ export const getMovieTrailer = (movieId) => async (dispatch) => {
     dispatch(actions.successIdSelectedMovie(response.data.results[0].key))
   } catch (e) {
     dispatch(actions.isLoadingTrailer(false))
+  }
+}
+
+export const getSimilar = (movieId) => async (dispatch) => {
+  try {
+    dispatch(actions.isLoadingSimilar(true))
+    const response = await repository.getSimilar(movieId)
+    dispatch(actions.isLoadingSimilar(false))
+    dispatch(actions.successGetSimilar(response.data.results))
+  } catch (e) {
+    dispatch(actions.isLoadingSimilar(false))
   }
 }

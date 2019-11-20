@@ -21,12 +21,16 @@ const initialState = {
     list: [],
     isLoading: false
   },
+  similar: {
+    list: [],
+    isLoading: false
+  },
   latest: {
     latest: {},
     isLoading: false
   },
   selected: {},
-  isLoadingTrailer: false
+  isLoadingTrailer: false,
 };
 
 export const movies = (state = initialState, action) => {
@@ -96,21 +100,33 @@ export const movies = (state = initialState, action) => {
         ...state,
         latest: { ...state.latest, isLoading: action.isLoading }
       };
+
     case types.SUCCESS_SELECT_MOVIE:
       return {
         ...state,
         selected: action.selected
       };
     case types.SUCCESS_ID_SELECTED_MOVIE:
-      console.log('action', action.videoId)
       return {
         ...state,
         selected: { ...state.selected, videoId: action.videoId }
       };
+
     case types.TRAILER_IS_LOADING:
       return {
         ...state,
         isLoadingTrailer: action.isLoadingTrailer
+      };
+
+    case types.SUCCESS_GET_SIMILAR:
+      return {
+        ...state,
+        similar: { ...state.similar, list: action.list }
+      };
+    case types.SIMILAR_IS_LOADING:
+      return {
+        ...state,
+        similar: { ...state.similar, isLoading: action.isLoading }
       };
     default:
       return state;

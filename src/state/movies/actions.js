@@ -30,6 +30,11 @@ export const successGetLatest = latest => ({
   latest,
 });
 
+export const successGetSimilar = list => ({
+  type: types.SUCCESS_GET_SIMILAR,
+  list,
+});
+
 // ---- //
 export const successSelectMovie = selected => ({
   type: types.SUCCESS_SELECT_MOVIE,
@@ -74,4 +79,9 @@ export const isLoadingLatest = isLoading => ({
 export const isLoadingTrailer = isLoadingTrailer => ({
   type: types.TRAILER_IS_LOADING,
   isLoadingTrailer
+})
+
+export const isLoadingSimilar = isLoading => ({
+  type: types.SIMILAR_IS_LOADING,
+  isLoading
 })

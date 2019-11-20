@@ -14,14 +14,11 @@ const GridItem = ({ data, handleDetails, fetchMore }) => {
       renderItem={({ item }) => (
         <View style={styles.containerItems}>
           <BaseButton
-            style={{
-              width: 150,
-              height: 200,
-            }}
+            style={styles.buttonImg}
             onPress={() => handleDetails(item)}
           >
             <FastImage
-              style={styles.buttonImg}
+              style={styles.picture}
               source={{
                 uri: `${poster500}${item.poster_path}`,
                 priority: FastImage.priority.normal,
