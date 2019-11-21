@@ -5,15 +5,16 @@ import { View, Text } from 'react-native'
 
 import { poster500 } from '../../../utils/constants'
 import { styles } from './style'
+import { SharedElement } from 'react-navigation-shared-element'
 
 const Popular = ({ popularList, handleDetails }) => {
   return (
     <FlatList
       data={popularList}
       horizontal
-      renderItem={({ item }) => (
+      renderItem={({ item, index }) => (
         <View style={styles.containerItems}>
-          <BaseButton style={styles.button} onPress={() => handleDetails(item)}>
+          <BaseButton style={styles.button} onPress={() => handleDetails(item, index)}>
             <FastImage
               style={styles.image}
               source={{

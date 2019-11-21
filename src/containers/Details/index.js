@@ -1,17 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useState, useRef } from 'react'
 import { BaseButton, ScrollView } from 'react-native-gesture-handler'
-import { REACT_APP_BASE_KEY } from 'react-native-dotenv'
 import { View, Text, SafeAreaView, Dimensions } from 'react-native'
+import { SharedElement } from 'react-navigation-shared-element'
+import { REACT_APP_BASE_KEY } from 'react-native-dotenv'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import FastImage from 'react-native-fast-image'
-import YouTube from 'react-native-youtube';
+import YouTube from 'react-native-youtube'
 import { connect } from 'react-redux'
+
 import { posterOriginal, backGroundColor, primaryColor, poster500 } from '../../utils/constants'
 import * as moviesService from '../../state/movies/service'
 import * as moviesAction from '../../state/movies/actions'
-
+import Loading from '../../components/shared/Loading'
 const { width } = Dimensions.get('window');
 
-const DetailsScreen = ({ selected, getMovieTrailer, isLoadingTrailer, getSimilar, similarList, similarIsLoading, successSelectSimilar }) => {
+const DetailsScreen = ({ selected, getMovieTrailer, isLoadingTrailer, getSimilar, similarList, similarIsLoading, successSelectSimilar, navigation }) => {
+  const index = navigation.getParam('index');
 
   const handleTrailer = () => {
     getMovieTrailer(selected.id)
@@ -24,39 +28,59 @@ const DetailsScreen = ({ selected, getMovieTrailer, isLoadingTrailer, getSimilar
   return (
     <View style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 0, backgroundColor: backGroundColor }} />
-      <ScrollView style={{ flex: 1, backgroundColor: backGroundColor }}>
+
+      <View style={{ width: '100%', height: 250 }}>
         {!isLoadingTrailer && selected.videoId ? (
           <YouTube
-            style={{ alignSelf: 'stretch', width: '100%', height: 300 }}
+            style={{ alignSelf: 'stretch', width: '100%', height: '100%' }}
             apiKey={REACT_APP_BASE_KEY}
             videoId={selected.videoId}
-            onError={e => console.log(e)}
             fullscreen={false}
             loop={false}
             play={true}
           />
         ) : (
-            <FastImage
-              style={{
-                width: '100%',
-                height: 300,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              source={{
-                uri: `${posterOriginal}${selected.backdrop_path}`,
-                priority: FastImage.priority.normal,
-              }}
-              resizeMode={FastImage.resizeMode.stretch}
-            >
-              {isLoadingTrailer ? <BaseButton style={{ width: 50, height: 50, backgroundColor: 'blue' }} onPress={handleTrailer}><Text>...</Text></BaseButton>
-                :
-                <BaseButton style={{ width: 50, height: 50, backgroundColor: 'blue' }} onPress={handleTrailer}><Text>Play</Text></BaseButton>
-              }
-            </FastImage>
+            <>
+              <SharedElement id={`image-${selected.id}-${index}`}>
+                <FastImage
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  source={{
+                    uri: `${posterOriginal}${selected.poster_path}`,
+                    priority: FastImage.priority.normal,
+                  }}
+                  resizeMode={FastImage.resizeMode.stretch}
+                >
+                  {!isLoadingTrailer && (
+                    <BaseButton
+                      onPress={handleTrailer}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        position: 'absolute',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Icon name="play-circle" size={50} color="#000" />
+                    </BaseButton>
+                  )}
+                </FastImage>
+              </SharedElement>
+              {isLoadingTrailer && (
+                <View style={{ position: 'absolute', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
+                  <Loading color="red" />
+                </View>
+              )}
+            </>
           )}
+      </View>
+      <ScrollView style={{ flex: 1, backgroundColor: backGroundColor }}>
         <View style={{ marginHorizontal: 10 }}>
-
           <Text numberOfLines={2} style={{ color: '#fff', marginBottom: 12, fontWeight: 'bold', fontSize: 20 }}>
             {selected.title}
           </Text>
@@ -130,6 +154,12 @@ const DetailsScreen = ({ selected, getMovieTrailer, isLoadingTrailer, getSimilar
     </View>
   )
 }
+
+DetailsScreen.sharedElements = (navigation, otherNavigation, showing) => {
+  const item = navigation.getParam('item');
+  const index = navigation.getParam('index');
+  return [`image-${item.id}-${index}`];
+};
 
 const mapStateToProps = state => ({
   selected: state.movies.selected,

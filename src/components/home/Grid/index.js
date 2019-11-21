@@ -5,26 +5,29 @@ import { View } from 'react-native'
 
 import { poster500 } from '../../../utils/constants'
 import { styles } from './style'
+import { SharedElement } from 'react-navigation-shared-element'
 
-const GridItem = ({ data, handleDetails, fetchMore }) => {
+const Grid = ({ data, handleDetails, fetchMore }) => {
   return (
     <FlatList
       data={data}
       horizontal
-      renderItem={({ item }) => (
+      renderItem={({ item, index }) => (
         <View style={styles.containerItems}>
           <BaseButton
             style={styles.buttonImg}
-            onPress={() => handleDetails(item)}
+            onPress={() => handleDetails(item, index)}
           >
-            <FastImage
-              style={styles.picture}
-              source={{
-                uri: `${poster500}${item.poster_path}`,
-                priority: FastImage.priority.normal,
-              }}
-              resizeMode={FastImage.resizeMode.stretch}
-            />
+            <SharedElement id={`image-${item.id}-${index}`}>
+              <FastImage
+                style={styles.picture}
+                source={{
+                  uri: `${poster500}${item.poster_path}`,
+                  priority: FastImage.priority.normal,
+                }}
+                resizeMode={FastImage.resizeMode.stretch}
+              />
+            </SharedElement>
           </BaseButton>
         </View>
       )}
@@ -35,4 +38,4 @@ const GridItem = ({ data, handleDetails, fetchMore }) => {
   )
 }
 
-export default GridItem
+export default Grid

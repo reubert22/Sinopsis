@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 
 import * as moviesService from '../../state/movies/service'
 import * as moviesAction from '../../state/movies/actions'
-import GridItem from '../../components/home/GridItem'
 import ItemTitle from '../../components/shared/Title'
 import Popular from '../../components/home/Popular'
 import Header from '../../components/home/Header'
+import Grid from '../../components/home/Grid'
 import { backGroundColor } from '../../utils/constants';
 
 const HomeScreen = ({
@@ -31,9 +31,9 @@ const HomeScreen = ({
     getUpcoming()
   }, [])
 
-  const handleSelectedMovie = (selectedMovie) => {
+  const handleSelectedMovie = (selectedMovie, index) => {
     successSelectMovie(selectedMovie)
-    return navigation.navigate('Details')
+    return navigation.navigate('Details', { item: selectedMovie, index })
   }
 
   const handleFetchMore = (type) => {
@@ -57,17 +57,17 @@ const HomeScreen = ({
 
         <ItemTitle title="Playing now" />
         {playingList.length !== 0 && (
-          <GridItem data={playingList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('playing')} />
+          <Grid data={playingList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('playing')} />
         )}
 
         <ItemTitle title="Top rated" />
         {topRatedList.length !== 0 && (
-          <GridItem data={topRatedList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('topRated')} />
+          <Grid data={topRatedList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('topRated')} />
         )}
 
         <ItemTitle title="Upcoming" />
         {upcomingList.length !== 0 && (
-          <GridItem data={upcomingList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('upcoming')} />
+          <Grid data={upcomingList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('upcoming')} />
         )}
       </ScrollView>
     </View >
@@ -76,8 +76,6 @@ const HomeScreen = ({
 
 /* istanbul ignore next */
 const mapStateToProps = state => ({
-  genresList: state.movies.genres.list,
-  genresLoading: state.movies.genres.isLoading,
   popularList: state.movies.popular.list,
   popularLoading: state.movies.popular.isLoading,
   playingList: state.movies.playing.list,
@@ -92,12 +90,10 @@ const mapStateToProps = state => ({
 
 /* istanbul ignore next */
 const mapDispatchToProps = {
-  getGenres: moviesService.getGenres,
   getPopular: moviesService.getPopular,
   getPlaying: moviesService.getPlaying,
   getTopRated: moviesService.getTopRated,
   getUpcoming: moviesService.getUpcoming,
-  getMovieTrailer: moviesService.getMovieTrailer,
   successSelectMovie: moviesAction.successSelectMovie
 }
 
