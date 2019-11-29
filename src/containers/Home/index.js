@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler'
 import { View, SafeAreaView } from 'react-native'
 import { connect } from 'react-redux'
@@ -24,6 +24,7 @@ const HomeScreen = ({
   latest,
   successSelectMovie
 }) => {
+  const [isScrolling, setIsScrolling] = useState(false)
   useEffect(() => {
     getPopular()
     getPlaying()
@@ -42,8 +43,18 @@ const HomeScreen = ({
 
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView style={{ flex: 0, backgroundColor: backGroundColor }} />
-      <ScrollView style={{ flex: 1, backgroundColor: backGroundColor }}>
+      {isScrolling && <SafeAreaView style={{ flex: 0, backgroundColor: backGroundColor }} />}
+      <ScrollView
+        onScroll={(e) => {
+          if (e.nativeEvent.contentOffset.y >= 390) {
+            setIsScrolling(true)
+          } else {
+            setIsScrolling(false)
+          }
+        }}
+        scrollEventThrottle={16}
+        style={{ flex: 1, backgroundColor: backGroundColor }}
+      >
 
         <Header
           latest={latest}

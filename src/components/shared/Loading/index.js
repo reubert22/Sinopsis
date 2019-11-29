@@ -1,6 +1,6 @@
 import React from 'react'
 import { Animated } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import LoadingIco from 'react-native-vector-icons/FontAwesome'
 import useRotate from '../hooks/UseRotate'
 
 const Loading = ({ size = 30, color }) => {
@@ -15,7 +15,7 @@ const Loading = ({ size = 30, color }) => {
         transform: [{ rotate }]
       }}
     >
-      <Icon name="spinner" size={size} color={color} />
+      <LoadingIco name="spinner" size={size} color={color} />
     </Animated.View>
   )
 }
