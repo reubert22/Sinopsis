@@ -3,17 +3,17 @@ import { StyleSheet } from 'react-native'
 export const styles = StyleSheet.create({
   containerItems: {
     alignItems: 'center',
-    marginHorizontal: 8,
+    marginHorizontal: 4,
     width: 100,
-    marginTop: 10,
-    marginBottom: 5
+    // marginTop: 10,
+    // marginBottom: 5
   },
   picture: {
     width: '100%',
     height: '100%',
   },
   buttonImg: {
-    width: 110,
+    width: 100,
     height: 150,
   },
   containerTitle: {
@@ -34,5 +34,18 @@ export const styles = StyleSheet.create({
   seeMoreTxt: {
     color: '#cecece',
     fontSize: 20
+  },
+  button: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 50
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 50,
+    borderColor: '#fff',
+    marginBottom: 10,
+    borderWidth: 2
   }
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BaseButton, ScrollView } from 'react-native-gesture-handler'
 import { View, Text, SafeAreaView, Dimensions } from 'react-native'
 import { SharedElement } from 'react-navigation-shared-element'
@@ -14,7 +14,11 @@ import * as moviesAction from '../../state/movies/actions'
 import Loading from '../../components/shared/Loading'
 const { width } = Dimensions.get('window');
 
-const DetailsScreen = ({ selected, getMovieTrailer, isLoadingTrailer, getSimilar, similarList, similarIsLoading, successSelectSimilar, navigation }) => {
+const DetailsScreen = ({
+  selected, getMovieTrailer, isLoadingTrailer,
+  getSimilar, similarList, similarIsLoading, successSelectSimilar,
+  navigation
+}) => {
   const index = navigation.getParam('index');
 
   const handleTrailer = () => {
@@ -81,22 +85,25 @@ const DetailsScreen = ({ selected, getMovieTrailer, isLoadingTrailer, getSimilar
       </View>
       <ScrollView style={{ flex: 1, backgroundColor: backGroundColor }}>
         <View style={{ marginHorizontal: 10 }}>
-          <Text numberOfLines={2} style={{ color: '#fff', marginBottom: 12, fontWeight: 'bold', fontSize: 20 }}>
+
+          <Text numberOfLines={2} style={{ color: '#fff', marginBottom: 10, fontWeight: 'bold', fontSize: 20 }}>
             {selected.title}
           </Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '50%', marginBottom: 12 }}>
-            <Text style={{ color: '#cecece', lineHeight: 25, fontSize: 16, fontFamily: 'Avenir' }}>Stars: {selected.vote_average}</Text>
-            <Text style={{ color: '#cecece', lineHeight: 25, fontSize: 16, fontFamily: 'Avenir' }}>
+
+          <View style={{ flexDirection: 'row', width: '50%', marginBottom: 5 }}>
+            <Text style={{ color: '#cecece', lineHeight: 25, fontSize: 12, fontFamily: 'Avenir' }}>
               {selected.release_date.substring(0, 4)}
             </Text>
-            <Text style={{ color: '#cecece', lineHeight: 25, fontSize: 16, fontFamily: 'Avenir' }}>
-              {selected.adult ? "Yes" : "No"}
-            </Text>
+            <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
+              <Text style={{ color: '#cecece', lineHeight: 25, fontSize: 12, fontFamily: 'Avenir' }}>{selected.vote_average}</Text>
+              <Icon name="star" size={15} color={primaryColor} />
+            </View>
           </View>
-          <Text style={{ color: '#fff', marginBottom: 12, lineHeight: 25, fontSize: 16, fontFamily: 'Avenir' }}>{selected.overview}</Text>
-        </View>
-        <View style={{ width: '100%', height: 1.5, backgroundColor: '#cecece' }} />
 
+          <Text style={{ color: '#fff', marginBottom: 15, lineHeight: 25, fontSize: 15, fontFamily: 'Avenir' }}>{selected.overview}</Text>
+        </View>
+
+        <View style={{ width: '100%', height: 1.5, backgroundColor: '#cecece' }} />
         <View style={{ width: 80, marginHorizontal: 10, borderTopColor: primaryColor, borderTopWidth: 5, alignItems: 'center' }}>
           <Text style={{ color: '#fff', marginBottom: 12, fontWeight: 'bold', fontSize: 20, marginTop: 12 }}>Similar</Text>
         </View>
@@ -131,7 +138,6 @@ const DetailsScreen = ({ selected, getMovieTrailer, isLoadingTrailer, getSimilar
             ))}
           </View>
         ) : (
-
             <View style={{
               width: '100%',
               flexDirection: 'row',
@@ -158,7 +164,7 @@ const DetailsScreen = ({ selected, getMovieTrailer, isLoadingTrailer, getSimilar
 DetailsScreen.sharedElements = (navigation, otherNavigation, showing) => {
   const item = navigation.getParam('item');
   const index = navigation.getParam('index');
-  return [`image-${item.id}-${index}`];
+  return [{ id: `image-${item.id}-${index}`, animation: 'fade' }];
 };
 
 const mapStateToProps = state => ({

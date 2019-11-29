@@ -3,12 +3,13 @@ import { SharedElement } from 'react-navigation-shared-element'
 import { BaseButton } from 'react-native-gesture-handler'
 import FastImage from 'react-native-fast-image'
 import { View, Text } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { posterOriginal } from '../../../utils/constants'
 import { styles } from './style'
 
 const Header = ({ latest, onDetails }) => (
-  <View style={styles.container}>
+  <BaseButton onPress={() => onDetails(latest, 0)} style={styles.container}>
     <SharedElement style={styles.container} id={`image-${latest.id}-0`}>
       <FastImage
         style={styles.image}
@@ -19,13 +20,19 @@ const Header = ({ latest, onDetails }) => (
         resizeMode={FastImage.resizeMode.stretch}
       />
     </SharedElement>
-    <BaseButton
-      onPress={() => onDetails(latest, 0)}
-      style={styles.centralBtn}
+    <View
+      style={{
+        position: 'absolute',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: 10,
+      }}
     >
-      <Text style={styles.centralBtnTxt}>Details</Text>
-    </BaseButton>
-  </View>
+      <Icon name="chevron-up" size={20} color="#fff" />
+
+    </View>
+  </BaseButton>
 )
 
 export default Header

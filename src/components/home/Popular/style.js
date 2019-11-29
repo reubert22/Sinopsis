@@ -5,10 +5,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    marginHorizontal: 7,
+    marginHorizontal: 4,
     width: 100,
     height: 100,
-    marginVertical: 15,
   },
   button: {
     width: '100%',

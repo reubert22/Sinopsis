@@ -50,24 +50,39 @@ const HomeScreen = ({
           onDetails={handleSelectedMovie}
         />
 
-        <ItemTitle title="Most popular" />
         {popularList.length !== 0 && (
-          <Popular popularList={popularList} handleDetails={handleSelectedMovie} />
+          <Popular
+            title="Most popular"
+            popularList={popularList}
+            handleDetails={handleSelectedMovie}
+          />
         )}
 
-        <ItemTitle title="Playing now" />
         {playingList.length !== 0 && (
-          <Grid data={playingList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('playing')} />
+          <Grid
+            data={playingList}
+            handleDetails={handleSelectedMovie}
+            fetchMore={() => handleFetchMore('playing')}
+            title="Playing now"
+          />
         )}
 
-        <ItemTitle title="Top rated" />
         {topRatedList.length !== 0 && (
-          <Grid data={topRatedList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('topRated')} />
+          <Grid
+            title="Top rated"
+            data={topRatedList}
+            handleDetails={handleSelectedMovie}
+            fetchMore={() => handleFetchMore('topRated')}
+          />
         )}
 
-        <ItemTitle title="Upcoming" />
         {upcomingList.length !== 0 && (
-          <Grid data={upcomingList} handleDetails={handleSelectedMovie} fetchMore={() => handleFetchMore('upcoming')} />
+          <Grid
+            title="Upcoming"
+            data={upcomingList}
+            handleDetails={handleSelectedMovie}
+            fetchMore={() => handleFetchMore('upcoming')}
+          />
         )}
       </ScrollView>
     </View >
