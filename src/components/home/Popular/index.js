@@ -15,7 +15,7 @@ const Popular = ({ popularList, handleDetails, title }) => {
       <FlatList
         data={popularList}
         horizontal
-        style={{ marginLeft: 7, marginBottom: 20, marginTop: 3 }}
+        style={{ marginBottom: 20, marginTop: 3 }}
         renderItem={({ item, index }) => (
           <View style={styles.containerItems}>
             <BaseButton style={styles.button} onPress={() => handleDetails(item, index)}>

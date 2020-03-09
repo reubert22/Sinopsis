@@ -15,7 +15,7 @@ const Grid = ({ data, handleDetails, fetchMore, title, rounded }) => {
       <FlatList
         data={data}
         horizontal
-        style={{ marginLeft: 7, marginBottom: 20, marginTop: 3 }}
+        style={{ marginBottom: 20, marginTop: 3 }}
         renderItem={({ item, index }) => (
           <View style={styles.containerItems}>
             <BaseButton
