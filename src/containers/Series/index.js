@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { withNavigationFocus } from "react-navigation";
 import { View, SafeAreaView } from 'react-native';
@@ -16,8 +16,6 @@ const SerieScreen = ({
   latest,
   isFocused
 }) => {
-  const [isScrolling, setIsScrolling] = useState(false);
-
   useEffect(() => {
     if (isFocused) {
       getPopular();
@@ -35,18 +33,8 @@ const SerieScreen = ({
 
   return (
     <View style={{ flex: 1 }}>
-      {isScrolling && <SafeAreaView style={{ flex: 0, backgroundColor: backGroundColor }} />}
-      <ScrollView
-        onScroll={(e) => {
-          if (e.nativeEvent.contentOffset.y >= 390) {
-            setIsScrolling(true)
-          } else {
-            setIsScrolling(false)
-          }
-        }}
-        scrollEventThrottle={16}
-        style={{ flex: 1, backgroundColor: backGroundColor }}
-      >
+      <SafeAreaView style={{ flex: 0, backgroundColor: backGroundColor }} />
+      <ScrollView style={{ flex: 1, backgroundColor: backGroundColor }}>
 
         <Header
           latest={latest}

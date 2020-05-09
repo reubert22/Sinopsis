@@ -114,7 +114,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: MovieStack,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="film" size={15} color={tintColor} />
+          <Icon name="film" size={tintColor === '#fff' ? 20 : 15} color={tintColor} />
         )
       })
     },
@@ -122,7 +122,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: SerieStack,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="tv" size={17} color={tintColor} />
+          <Icon name="tv" size={tintColor === '#fff' ? 20 : 17} color={tintColor} />
         )
       })
     },
@@ -130,7 +130,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: HomeStack,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="home" size={25} color={tintColor} />
+          <Icon name="home" size={tintColor === '#fff' ? 25 : 22} color={tintColor} />
         )
       })
     },
@@ -138,7 +138,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: WishStack,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="heart" size={17} color={tintColor} />
+          <Icon name="heart" size={tintColor === '#fff' ? 20 : 17} color={tintColor} />
         )
       })
     },
@@ -146,7 +146,7 @@ const TabNavigator = createBottomTabNavigator(
       screen: SearchStack,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="search" size={17} color={tintColor} />
+          <Icon name="search" size={tintColor === '#fff' ? 20 : 17} color={tintColor} />
         )
       })
     },
