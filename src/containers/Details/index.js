@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { BaseButton, ScrollView } from 'react-native-gesture-handler'
 import { View, Text, SafeAreaView, Dimensions } from 'react-native'
 import { SharedElement } from 'react-navigation-shared-element'
@@ -59,7 +59,7 @@ const DetailsScreen = ({
                   }}
                   resizeMode={FastImage.resizeMode.stretch}
                 >
-                  {!isLoadingTrailer && (
+                  {!isLoadingTrailer ? (
                     <BaseButton
                       onPress={handleTrailer}
                       style={{
@@ -72,14 +72,13 @@ const DetailsScreen = ({
                     >
                       <Icon name="play-circle" size={50} color="#000" />
                     </BaseButton>
-                  )}
+                  ) : (
+                      <View style={{ position: 'absolute', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
+                        <Loading color="red" />
+                      </View>
+                    )}
                 </FastImage>
               </SharedElement>
-              {isLoadingTrailer && (
-                <View style={{ position: 'absolute', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
-                  <Loading color="red" />
-                </View>
-              )}
             </>
           )}
       </View>
