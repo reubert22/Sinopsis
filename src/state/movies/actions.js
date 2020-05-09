@@ -1,4 +1,4 @@
-import * as types from '../../utils/action.types'
+import * as types from './types'
 
 export const successGetGenres = list => ({
   type: types.SUCCESS_GET_GENRES,

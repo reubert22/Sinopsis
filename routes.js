@@ -8,6 +8,8 @@ import { Animated, Easing } from 'react-native';
 
 import DetailsScreen from './src/containers/Details';
 import HomeScreen from './src/containers/Home';
+import MovieScreen from './src/containers/Movies';
+import SerieScreen from './src/containers/Series';
 
 const transitionConfig = {
   transitionSpec: {
@@ -44,7 +46,7 @@ const HomeStack = createSharedElementStackNavigator(createStackNavigator, {
 
 const MovieStack = createSharedElementStackNavigator(createStackNavigator, {
   Movie: {
-    screen: HomeScreen,
+    screen: MovieScreen,
   },
   Details: {
     screen: DetailsScreen,
@@ -60,7 +62,7 @@ const MovieStack = createSharedElementStackNavigator(createStackNavigator, {
 
 const SerieStack = createSharedElementStackNavigator(createStackNavigator, {
   Serie: {
-    screen: HomeScreen,
+    screen: SerieScreen,
   },
   Details: {
     screen: DetailsScreen,

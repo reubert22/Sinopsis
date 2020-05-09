@@ -1,4 +1,4 @@
-import * as types from '../utils/action.types'
+import * as types from './types'
 
 const initialState = {
   genres: {

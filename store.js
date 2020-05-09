@@ -4,9 +4,13 @@ import thunk from 'redux-thunk'
 import AsyncStorage from '@react-native-community/async-storage'
 import { persistReducer, persistStore } from 'redux-persist'
 
-import { movies } from './src/reducers/movies'
+import { movies } from './src/state/movies/reducer'
+import { series } from './src/state/series/series'
 
-const reducer = combineReducers({ movies })
+const reducer = combineReducers({
+  movies,
+  series,
+});
 
 const enhancer = applyMiddleware(thunk);
 
