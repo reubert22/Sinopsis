@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { BaseButton, ScrollView } from 'react-native-gesture-handler'
 import { View, Text, SafeAreaView, Dimensions } from 'react-native'
 import { SharedElement } from 'react-navigation-shared-element'

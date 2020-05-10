@@ -1,12 +1,11 @@
-import React from 'react'
-import { SharedElement } from 'react-navigation-shared-element'
-import { BaseButton } from 'react-native-gesture-handler'
-import FastImage from 'react-native-fast-image'
-import { View, Text } from 'react-native'
-import ChevronIco from 'react-native-vector-icons/FontAwesome'
+import React from 'react';
+import { SharedElement } from 'react-navigation-shared-element';
+import ChevronIco from 'react-native-vector-icons/FontAwesome';
+import { BaseButton } from 'react-native-gesture-handler';
+import { View, StyleSheet } from 'react-native';
+import FastImage from 'react-native-fast-image';
 
-import { posterOriginal } from '../../../utils/constants'
-import { styles } from './style'
+import { posterOriginal } from '../../../utils/constants';
 
 const Header = ({ latest, onDetails }) => (
   <BaseButton onPress={() => onDetails(latest, 0)} style={styles.container}>
@@ -33,5 +32,17 @@ const Header = ({ latest, onDetails }) => (
     </View>
   </BaseButton>
 )
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: 420,
+    marginBottom: 15,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+});
 
 export default Header

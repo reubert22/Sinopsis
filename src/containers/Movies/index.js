@@ -11,7 +11,7 @@ import Header from '../../components/shared/Header';
 import Grid from '../../components/shared/Grid';
 import { backGroundColor } from '../../utils/constants';
 
-const HomeScreen = ({
+const MovieScreen = ({
   navigation,
   getPopular,
   popularList,
@@ -55,7 +55,7 @@ const HomeScreen = ({
 
         {popularList.length !== 0 && (
           <Popular
-            title="Most popular movies"
+            title="Most popular"
             popularList={popularList}
             handleDetails={handleSelectedMovie}
           />
@@ -118,4 +118,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withNavigationFocus(HomeScreen))
+)(withNavigationFocus(MovieScreen))
