@@ -15,11 +15,19 @@ import Loading from '../../components/shared/Loading'
 const { width } = Dimensions.get('window');
 
 const DetailsScreen = ({
-  selected, getMovieTrailer, isLoadingTrailer,
-  getSimilar, similarList, similarIsLoading, successSelectSimilar,
+  getMovieTrailer,
+  isLoadingTrailer,
+  getSimilar,
+  similarList,
+  similarIsLoading,
   navigation
 }) => {
   const index = navigation.getParam('index');
+  const selected = navigation.getParam('item');
+
+  const handleSelectedSimilar = (selectedMovie, index) => {
+    navigation.navigate('Details', { item: selectedMovie, index })
+  }
 
   const handleTrailer = () => {
     getMovieTrailer(selected.id)
@@ -113,15 +121,16 @@ const DetailsScreen = ({
             flexDirection: 'row',
             flexWrap: 'wrap',
           }}>
-            {similarList.map(item => (
+            {similarList.map((item, index) => (
               <BaseButton
+                key={`similar-id-${item.id}`}
                 style={{
                   marginHorizontal: 3,
                   marginVertical: 3,
                   width: (width / 3) - 7,
                   height: 150
                 }}
-                onPress={() => successSelectSimilar(item)}>
+                onPress={() => handleSelectedSimilar(item, index)}>
 
                 <FastImage
                   style={{
@@ -138,23 +147,18 @@ const DetailsScreen = ({
             ))}
           </View>
         ) : (
-            <View style={{
-              width: '100%',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-            }}>
-              {['', '', ''].map(item => (
-                <View
-                  style={{
-                    marginHorizontal: 3,
-                    marginVertical: 3,
-                    width: (width / 3) - 7,
-                    height: 150,
-                    backgroundColor: 'rgba(148, 147, 146, 0.2)'
-                  }}
-                />
-              ))}
-            </View>
+            <Text
+              style={{
+                textAlign: 'center',
+                color: '#fff',
+                marginBottom: 15,
+                lineHeight: 25,
+                fontSize: 15,
+                fontFamily: 'Avenir'
+              }}
+            >
+              Não há nenhum títulos similares.
+            </Text>
           )}
       </ScrollView>
     </View>
