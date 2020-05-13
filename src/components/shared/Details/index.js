@@ -1,52 +1,53 @@
-import React, { useEffect } from 'react'
-import { BaseButton, ScrollView } from 'react-native-gesture-handler'
-import { View, Text, SafeAreaView, Dimensions } from 'react-native'
-import { SharedElement } from 'react-navigation-shared-element'
-import { REACT_APP_BASE_KEY } from 'react-native-dotenv'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import FastImage from 'react-native-fast-image'
-import YouTube from 'react-native-youtube'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react';
+import { BaseButton, ScrollView } from 'react-native-gesture-handler';
+import { View, Text, SafeAreaView, Dimensions } from 'react-native';
+import { SharedElement } from 'react-navigation-shared-element';
+import { REACT_APP_BASE_KEY } from 'react-native-dotenv';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import FastImage from 'react-native-fast-image';
+import YouTube from 'react-native-youtube';
 
-import { posterOriginal, backGroundColor, primaryColor, poster500 } from '../../utils/constants'
-import * as moviesService from '../../state/movies/service'
-import * as moviesAction from '../../state/movies/actions'
-import Loading from '../../components/shared/Loading'
+import { posterOriginal, backGroundColor, primaryColor, poster500 } from '../../../utils/constants';
+import Loading from '../Loading';
 const { width } = Dimensions.get('window');
 
 const DetailsScreen = ({
-  getMovieTrailer,
-  isLoadingTrailer,
-  getSimilar,
+  trailerId,
+  isLoadingTrailerId,
   similarList,
-  similarIsLoading,
+  isLoadingSimilar,
+  getTrailer,
+  getSimilar,
+  resetTrailerId,
   navigation
 }) => {
   const index = navigation.getParam('index');
   const selected = navigation.getParam('item');
 
   const handleSelectedSimilar = (selectedMovie, index) => {
+    resetTrailerId();
     navigation.navigate('Details', { item: selectedMovie, index })
   }
 
-  const handleTrailer = () => {
-    getMovieTrailer(selected.id)
-  }
-
   useEffect(() => {
-    getSimilar(selected.id)
-  }, [selected])
+    getSimilar(selected.id, selected.type);
+    return () => resetTrailerId();
+  }, []);
+
+  const handleTrailer = () => {
+    getTrailer(selected.id, selected.type);
+  }
 
   return (
     <View style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 0, backgroundColor: backGroundColor }} />
 
       <View style={{ width: '100%', height: 250 }}>
-        {!isLoadingTrailer && selected.videoId ? (
+        {!isLoadingTrailerId && trailerId ? (
           <YouTube
             style={{ alignSelf: 'stretch', width: '100%', height: '100%' }}
             apiKey={REACT_APP_BASE_KEY}
-            videoId={selected.videoId}
+            videoId={trailerId}
             fullscreen={false}
             loop={false}
             play={true}
@@ -67,7 +68,7 @@ const DetailsScreen = ({
                   }}
                   resizeMode={FastImage.resizeMode.stretch}
                 >
-                  {!isLoadingTrailer && (
+                  {!isLoadingTrailerId && (
                     <BaseButton
                       onPress={handleTrailer}
                       style={{
@@ -83,7 +84,7 @@ const DetailsScreen = ({
                   )}
                 </FastImage>
               </SharedElement>
-              {isLoadingTrailer && (
+              {isLoadingTrailerId && (
                 <View style={{ position: 'absolute', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
                   <Loading color="red" />
                 </View>
@@ -100,7 +101,10 @@ const DetailsScreen = ({
 
           <View style={{ flexDirection: 'row', width: '50%', marginBottom: 5 }}>
             <Text style={{ color: '#cecece', lineHeight: 25, fontSize: 12, fontFamily: 'Avenir' }}>
-              {selected.first_air_date.substring(0, 4) || selected.release_date.substring(0, 4)}
+              {selected.type === 'movie'
+                ? selected.release_date.substring(0, 4)
+                : selected.first_air_date.substring(0, 4)
+              }
             </Text>
             <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
               <Text style={{ color: '#cecece', lineHeight: 25, fontSize: 12, fontFamily: 'Avenir' }}>{selected.vote_average}</Text>
@@ -115,7 +119,7 @@ const DetailsScreen = ({
         <View style={{ width: 80, marginHorizontal: 10, borderTopColor: primaryColor, borderTopWidth: 5, alignItems: 'center' }}>
           <Text style={{ color: '#fff', marginBottom: 12, fontWeight: 'bold', fontSize: 20, marginTop: 12 }}>Similar</Text>
         </View>
-        {similarList.length !== 0 && !similarIsLoading ? (
+        {similarList.length !== 0 && !isLoadingSimilar ? (
           <View style={{
             width: '100%',
             flexDirection: 'row',
@@ -146,46 +150,25 @@ const DetailsScreen = ({
               </BaseButton>
             ))}
           </View>
+        ) : isLoadingSimilar ? (
+          <Loading color={primaryColor} />
         ) : (
-            <Text
-              style={{
-                textAlign: 'center',
-                color: '#fff',
-                marginBottom: 15,
-                lineHeight: 25,
-                fontSize: 15,
-                fontFamily: 'Avenir'
-              }}
-            >
-              Não há nenhum títulos similares.
-            </Text>
-          )}
+              <Text
+                style={{
+                  textAlign: 'center',
+                  color: '#fff',
+                  marginBottom: 15,
+                  lineHeight: 25,
+                  fontSize: 15,
+                  fontFamily: 'Avenir'
+                }}
+              >
+                Não há nenhum títulos similares.
+              </Text>
+            )}
       </ScrollView>
     </View>
   )
 }
 
-DetailsScreen.sharedElements = (navigation, otherNavigation, showing) => {
-  const item = navigation.getParam('item');
-  const index = navigation.getParam('index');
-  return [{ id: `image-${item.id}-${index}`, animation: 'fade' }];
-};
-
-const mapStateToProps = state => ({
-  selected: state.movies.selected,
-  isLoadingTrailer: state.movies.isLoadingTrailer,
-  similarList: state.movies.similar.list,
-  similarIsLoading: state.movies.similar.isLoading,
-})
-
-/* istanbul ignore next */
-const mapDispatchToProps = {
-  getMovieTrailer: moviesService.getMovieTrailer,
-  getSimilar: moviesService.getSimilar,
-  successSelectSimilar: moviesAction.successSelectMovie
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(DetailsScreen)
+export default DetailsScreen
