@@ -96,14 +96,18 @@ const DetailsScreen = ({
         <View style={{ marginHorizontal: 10 }}>
 
           <Text numberOfLines={2} style={{ color: '#fff', marginBottom: 10, fontWeight: 'bold', fontSize: 20 }}>
-            {selected.title}
+            {selected.type === 'movie'
+              ? selected.title
+              : selected.name
+            }
           </Text>
 
-          <View style={{ flexDirection: 'row', width: '50%', marginBottom: 5 }}>
-            <Text style={{ color: '#cecece', lineHeight: 25, fontSize: 12, fontFamily: 'Avenir' }}>
+          <View style={{ flexDirection: 'row', width: '100%', marginBottom: 5, display: 'flex', justifyContent: 'space-between' }}>
+            <Text style={{ color: '#cecece', lineHeight: 25, fontSize: 16, fontFamily: 'Avenir' }}>
+              Date:
               {selected.type === 'movie'
-                ? selected.release_date.substring(0, 4)
-                : selected.first_air_date.substring(0, 4)
+                ? ` ${selected.release_date.substring(0, 4)}`
+                : ` ${selected.first_air_date.substring(0, 4)}`
               }
             </Text>
             <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
