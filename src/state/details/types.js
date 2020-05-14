@@ -1,0 +1,7 @@
+export const SUCCESS_GET_TRAILER_ID = "details/SUCCESS_GET_TRAILER_ID";
+export const IS_LOADING_TRAILER_ID = "details/IS_LOADING_TRAILER_ID";
+
+export const SUCCESS_GET_SIMILAR_LIST = "details/SUCCESS_GET_SIMILAR_LIST";
+export const IS_LOADING_SIMILAR_LIST = "details/IS_LOADING_SIMILAR_LIST";
+
+export const RESET_TRAILER_ID = "details/RESET_TRAILER_ID";

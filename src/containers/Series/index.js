@@ -14,7 +14,7 @@ const SerieScreen = ({
   getPopular,
   popularList,
   latest,
-  isFocused
+  isFocused,
 }) => {
   useEffect(() => {
     if (isFocused) {
@@ -23,8 +23,7 @@ const SerieScreen = ({
   }, [isFocused]);
 
   const handleSelectedSerie = (selectedMovie, index) => {
-    // successSelectMovie(selectedMovie)
-    // return navigation.navigate('Details', { item: selectedMovie, index })
+    return navigation.navigate('Details', { item: selectedMovie, index })
   }
 
   const handleFetchMore = (type) => {

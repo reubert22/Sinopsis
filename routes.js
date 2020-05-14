@@ -6,7 +6,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Animated, Easing } from 'react-native';
 
-import DetailsScreen from './src/containers/Details';
+import DetailsScreen from './src/containers/DetailsLinker/index';
 import HomeScreen from './src/containers/Home';
 import MovieScreen from './src/containers/Movies';
 import SerieScreen from './src/containers/Series';

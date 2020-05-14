@@ -6,10 +6,12 @@ import { persistReducer, persistStore } from 'redux-persist'
 
 import { movies } from './src/state/movies/reducer'
 import { series } from './src/state/series/series'
+import { details } from './src/state/details/reducer';
 
 const reducer = combineReducers({
   movies,
   series,
+  details
 });
 
 const enhancer = applyMiddleware(thunk);
