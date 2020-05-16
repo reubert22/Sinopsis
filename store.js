@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { persistReducer, persistStore } from 'redux-persist'
 
 import { movies } from './src/state/movies/reducer'
-import { series } from './src/state/series/series'
+import { series } from './src/state/series/reducer'
 import { details } from './src/state/details/reducer';
 
 const reducer = combineReducers({

@@ -3,3 +3,12 @@ export const POPULAR_IS_LOADING = "series/POPULAR_IS_LOADING";
 
 export const SUCCESS_GET_LATEST = "series/SUCCESS_GET_LATEST";
 export const LATEST_IS_LOADING = "series/LATEST_IS_LOADING";
+
+export const SUCCESS_GET_ON_THE_AIR = "series/SUCCESS_GET_ON_THE_AIR";
+export const ON_THE_AIR_IS_LOADING = "series/ON_THE_AIR_IS_LOADING";
+
+export const SUCCESS_GET_TOP_RATED = "series/SUCCESS_GET_TOP_RATED";
+export const TOP_RATED_IS_LOADING = "series/TOP_RATED_IS_LOADING";
+
+export const SUCCESS_GET_AIRING_TODAY = "series/SUCCESS_GET_AIRING_TODAY";
+export const AIRING_TODAY_IS_LOADING = "series/AIRING_TODAY_IS_LOADING";
