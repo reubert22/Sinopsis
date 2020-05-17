@@ -27,10 +27,10 @@ const HomeScreen = ({
 }) => {
   useEffect(() => {
     if (isFocused) {
-      getPopular();
-      getPlaying();
-      getTopRated();
-      getUpcoming();
+      // getPopular();
+      // getPlaying();
+      // getTopRated();
+      // getUpcoming();
     }
   }, [isFocused]);
 
@@ -48,7 +48,7 @@ const HomeScreen = ({
       <SafeAreaView style={{ flex: 0, backgroundColor: backGroundColor }} />
       <ScrollView style={{ flex: 1, backgroundColor: backGroundColor }}>
 
-        <Header
+        {/* <Header
           latest={latest}
           onDetails={handleSelectedMovie}
         />
@@ -86,7 +86,7 @@ const HomeScreen = ({
             handleDetails={handleSelectedMovie}
             fetchMore={() => handleFetchMore('upcoming')}
           />
-        )}
+        )} */}
       </ScrollView>
     </View>
   )

@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import * as seriesService from '../../state/series/service';
 import Popular from '../../components/shared/Popular';
 import Header from '../../components/shared/Header';
+import Grid from '../../components/shared/Grid';
 import { backGroundColor } from '../../utils/constants';
 
 const SerieScreen = ({
@@ -15,10 +16,19 @@ const SerieScreen = ({
   popularList,
   latest,
   isFocused,
+  getOnTheAir,
+  onTheAirList,
+  getTopRated,
+  topRatedList,
+  getAiringToday,
+  airingTodayList,
 }) => {
   useEffect(() => {
     if (isFocused) {
       getPopular();
+      getOnTheAir();
+      getTopRated();
+      getAiringToday();
     }
   }, [isFocused]);
 
@@ -47,6 +57,34 @@ const SerieScreen = ({
             handleDetails={handleSelectedSerie}
           />
         )}
+
+        {onTheAirList.length !== 0 && (
+          <Grid
+            data={onTheAirList}
+            handleDetails={handleSelectedSerie}
+            fetchMore={() => handleFetchMore('playing')}
+            title="On the air"
+          />
+        )}
+
+        {topRatedList.length !== 0 && (
+          <Grid
+            data={topRatedList}
+            handleDetails={handleSelectedSerie}
+            fetchMore={() => handleFetchMore('playing')}
+            title="Top rated"
+          />
+        )}
+
+        {airingTodayList.length !== 0 && (
+          <Grid
+            data={airingTodayList}
+            handleDetails={handleSelectedSerie}
+            fetchMore={() => handleFetchMore('playing')}
+            title="Airing today"
+          />
+        )}
+
       </ScrollView>
     </View>
   )
@@ -56,11 +94,16 @@ const SerieScreen = ({
 const mapStateToProps = state => ({
   popularList: state.series.popular.list,
   latest: state.series.latest.latest,
+  onTheAirList: state.series.onTheAir.list,
+  topRatedList: state.series.topRated.list,
+  airingTodayList: state.series.airingToday.list
 })
 
-/* istanbul ignore next */
 const mapDispatchToProps = {
   getPopular: seriesService.getPopular,
+  getOnTheAir: seriesService.getOnTheAir,
+  getTopRated: seriesService.getTopRated,
+  getAiringToday: seriesService.getAiringToday,
 }
 
 export default connect(
