@@ -4,43 +4,58 @@ import { SharedElement } from 'react-navigation-shared-element';
 import FastImage from 'react-native-fast-image';
 import { View, StyleSheet } from 'react-native';
 
-import { poster500 } from '../../../utils/constants';
+import { poster500, primaryColor } from '../../../utils/constants';
+import Loading from '../Loading';
 import ItemTitle from '../Title';
 
-const Grid = ({ data, handleDetails, fetchMore, title, rounded }) => (
+const Grid = ({ data, handleDetails, fetchMore, title, rounded, isLoading }) => (
   <>
     <ItemTitle title={title} />
-    <FlatList
-      data={data}
-      horizontal
-      style={{ marginLeft: 7, marginBottom: 20, marginTop: 3 }}
-      renderItem={({ item, index }) => (
-        <View style={styles.containerItems}>
-          <BaseButton
-            style={rounded ? styles.button : styles.buttonImg}
-            onPress={() => handleDetails(item, index)}
-          >
-            <SharedElement id={`image-${item.id}-${index}`}>
-              <FastImage
-                style={rounded ? styles.image : styles.picture}
-                source={{
-                  uri: `${poster500}${item.poster_path}`,
-                  priority: FastImage.priority.normal,
-                }}
-                resizeMode={FastImage.resizeMode.stretch}
-              />
-            </SharedElement>
-          </BaseButton>
-        </View>
+    {isLoading ? (
+      <View style={styles.containerLoading}>
+        <Loading color={primaryColor} />
+      </View>
+    ) : (
+        <FlatList
+          data={data}
+          horizontal
+          style={{ marginLeft: 7, marginBottom: 20, marginTop: 3 }}
+          renderItem={({ item, index }) => (
+            <View style={styles.containerItems}>
+              <BaseButton
+                style={rounded ? styles.button : styles.buttonImg}
+                onPress={() => handleDetails(item, index)}
+              >
+                <SharedElement id={`image-${item.id}-${index}`}>
+                  <FastImage
+                    style={rounded ? styles.image : styles.picture}
+                    source={{
+                      uri: `${poster500}${item.poster_path}`,
+                      priority: FastImage.priority.normal,
+                    }}
+                    resizeMode={FastImage.resizeMode.stretch}
+                  />
+                </SharedElement>
+              </BaseButton>
+            </View>
+          )}
+          keyExtractor={item => `${item.id}-popular-btn`}
+          onEndReached={fetchMore}
+          showsHorizontalScrollIndicator={false}
+        />
       )}
-      keyExtractor={item => `${item.id}-popular-btn`}
-      onEndReached={fetchMore}
-      showsHorizontalScrollIndicator={false}
-    />
   </>
 )
 
 const styles = StyleSheet.create({
+  containerLoading: {
+    width: '100%',
+    height: 150,
+    marginBottom: 20,
+    marginTop: 3,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   containerItems: {
     alignItems: 'center',
     marginHorizontal: 4,

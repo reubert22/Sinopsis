@@ -23,7 +23,11 @@ const MovieScreen = ({
   getUpcoming,
   latest,
   successSelectMovie,
-  isFocused
+  isFocused,
+  popularLoading,
+  playingLoading,
+  topRatedLoading,
+  upcomingLoading,
 }) => {
   useEffect(() => {
     if (isFocused) {
@@ -50,43 +54,40 @@ const MovieScreen = ({
 
         <Header
           latest={latest}
+          isLoading={popularLoading}
           onDetails={handleSelectedMovie}
         />
 
-        {popularList.length !== 0 && (
-          <Popular
-            title="Most popular"
-            popularList={popularList}
-            handleDetails={handleSelectedMovie}
-          />
-        )}
+        <Popular
+          title="Most popular"
+          isLoading={popularLoading}
+          popularList={popularList}
+          handleDetails={handleSelectedMovie}
+        />
 
-        {playingList.length !== 0 && (
-          <Grid
-            data={playingList}
-            handleDetails={handleSelectedMovie}
-            fetchMore={() => handleFetchMore('playing')}
-            title="Playing now"
-          />
-        )}
+        <Grid
+          data={playingList}
+          handleDetails={handleSelectedMovie}
+          fetchMore={() => handleFetchMore('playing')}
+          title="Playing now"
+          isLoading={playingLoading}
+        />
 
-        {topRatedList.length !== 0 && (
-          <Grid
-            title="Top rated"
-            data={topRatedList}
-            handleDetails={handleSelectedMovie}
-            fetchMore={() => handleFetchMore('topRated')}
-          />
-        )}
+        <Grid
+          title="Top rated"
+          data={topRatedList}
+          isLoading={topRatedLoading}
+          handleDetails={handleSelectedMovie}
+          fetchMore={() => handleFetchMore('topRated')}
+        />
 
-        {upcomingList.length !== 0 && (
-          <Grid
-            title="Upcoming"
-            data={upcomingList}
-            handleDetails={handleSelectedMovie}
-            fetchMore={() => handleFetchMore('upcoming')}
-          />
-        )}
+        <Grid
+          title="Upcoming"
+          data={upcomingList}
+          isLoading={upcomingLoading}
+          handleDetails={handleSelectedMovie}
+          fetchMore={() => handleFetchMore('upcoming')}
+        />
       </ScrollView>
     </View>
   )
@@ -106,7 +107,6 @@ const mapStateToProps = state => ({
   latestLoading: state.movies.latest.isLoading,
 })
 
-/* istanbul ignore next */
 const mapDispatchToProps = {
   getPopular: moviesService.getPopular,
   getPlaying: moviesService.getPlaying,

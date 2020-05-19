@@ -22,6 +22,10 @@ const SerieScreen = ({
   topRatedList,
   getAiringToday,
   airingTodayList,
+  isLoadingOnTheAir,
+  isLoadingTopRated,
+  isLoadingAiringToday,
+  isLoadingPopular
 }) => {
   useEffect(() => {
     if (isFocused) {
@@ -47,43 +51,40 @@ const SerieScreen = ({
 
         <Header
           latest={latest}
+          isLoading={isLoadingPopular}
           onDetails={handleSelectedSerie}
         />
 
-        {popularList.length !== 0 && (
-          <Popular
-            title="Most popular"
-            popularList={popularList}
-            handleDetails={handleSelectedSerie}
-          />
-        )}
+        <Popular
+          title="Most popular"
+          isLoading={isLoadingPopular}
+          popularList={popularList}
+          handleDetails={handleSelectedSerie}
+        />
 
-        {onTheAirList.length !== 0 && (
-          <Grid
-            data={onTheAirList}
-            handleDetails={handleSelectedSerie}
-            fetchMore={() => handleFetchMore('playing')}
-            title="On the air"
-          />
-        )}
+        <Grid
+          data={onTheAirList}
+          isLoading={isLoadingOnTheAir}
+          handleDetails={handleSelectedSerie}
+          fetchMore={() => handleFetchMore('playing')}
+          title="On the air"
+        />
 
-        {topRatedList.length !== 0 && (
-          <Grid
-            data={topRatedList}
-            handleDetails={handleSelectedSerie}
-            fetchMore={() => handleFetchMore('playing')}
-            title="Top rated"
-          />
-        )}
+        <Grid
+          data={topRatedList}
+          isLoading={isLoadingTopRated}
+          handleDetails={handleSelectedSerie}
+          fetchMore={() => handleFetchMore('playing')}
+          title="Top rated"
+        />
 
-        {airingTodayList.length !== 0 && (
-          <Grid
-            data={airingTodayList}
-            handleDetails={handleSelectedSerie}
-            fetchMore={() => handleFetchMore('playing')}
-            title="Airing today"
-          />
-        )}
+        <Grid
+          data={airingTodayList}
+          isLoading={isLoadingAiringToday}
+          handleDetails={handleSelectedSerie}
+          fetchMore={() => handleFetchMore('playing')}
+          title="Airing today"
+        />
 
       </ScrollView>
     </View>
@@ -94,9 +95,13 @@ const SerieScreen = ({
 const mapStateToProps = state => ({
   popularList: state.series.popular.list,
   latest: state.series.latest.latest,
+  isLoadingPopular: state.series.popular.isLoading,
   onTheAirList: state.series.onTheAir.list,
+  isLoadingOnTheAir: state.series.onTheAir.isLoading,
   topRatedList: state.series.topRated.list,
-  airingTodayList: state.series.airingToday.list
+  isLoadingTopRated: state.series.topRated.isLoading,
+  airingTodayList: state.series.airingToday.list,
+  isLoadingAiringToday: state.series.airingToday.isLoading,
 })
 
 const mapDispatchToProps = {
