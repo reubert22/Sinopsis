@@ -30,13 +30,11 @@ const MovieScreen = ({
   upcomingLoading,
 }) => {
   useEffect(() => {
-    if (isFocused) {
-      getPopular();
-      getPlaying();
-      getTopRated();
-      getUpcoming();
-    }
-  }, [isFocused]);
+    getPopular();
+    getPlaying();
+    getTopRated();
+    getUpcoming();
+  }, []);
 
   const handleSelectedMovie = (selectedMovie, index) => {
     successSelectMovie(selectedMovie)

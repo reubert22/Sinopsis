@@ -85,3 +85,13 @@ export const isLoadingSimilar = isLoading => ({
   type: types.SIMILAR_IS_LOADING,
   isLoading
 })
+
+export const successGetMorePopular = list => ({
+  type: types.SUCCESS_GET_MORE_POPULAR,
+  list
+})
+
+export const isLoadingMorePopular = isLoading => ({
+  type: types.MORE_POPULAR_IS_LOADING,
+  isLoading
+})

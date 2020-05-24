@@ -2,12 +2,22 @@ package com.sinopsis;
 
 import android.app.Application;
 import android.content.Context;
+import java.lang.reflect.InvocationTargetException;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.dylanvann.fastimage.FastImageViewPackage;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
+import com.swmansion.reanimated.ReanimatedPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
-import java.lang.reflect.InvocationTargetException;
+import com.facebook.react.shell.MainReactPackage;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -21,11 +31,15 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
-          List<ReactPackage> packages = new PackageList(this).getPackages();
-          // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
-          return packages;
+          return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new ReactNativeYouTube(),
+            new ReanimatedPackage(),
+            new AsyncStoragePackage(),
+            new VectorIconsPackage(),
+            new RNGestureHandlerPackage(),
+            new FastImageViewPackage()
+          );
         }
 
         @Override

@@ -28,13 +28,11 @@ const SerieScreen = ({
   isLoadingPopular
 }) => {
   useEffect(() => {
-    if (isFocused) {
-      getPopular();
-      getOnTheAir();
-      getTopRated();
-      getAiringToday();
-    }
-  }, [isFocused]);
+    getPopular();
+    getOnTheAir();
+    getTopRated();
+    getAiringToday();
+  }, []);
 
   const handleSelectedSerie = (selectedMovie, index) => {
     return navigation.navigate('Details', { item: selectedMovie, index })

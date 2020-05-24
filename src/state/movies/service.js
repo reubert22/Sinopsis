@@ -20,8 +20,10 @@ export const getPopular = () => async (dispatch, getState) => {
     const response = await repository.getPopular()
     const newResponse = returnType(response.data.results, 'movie');
     dispatch(actions.successGetPopular(newResponse))
+
     if (latest && !latest.id) {
       const latestOfPopular = Math.floor(Math.random() * newResponse.length);
+      console.log(newResponse[latestOfPopular])
       dispatch(actions.successGetLatest(newResponse[latestOfPopular]))
     }
     dispatch(actions.isLoadingPopular(false))
