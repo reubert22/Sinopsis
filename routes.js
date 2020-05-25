@@ -126,33 +126,33 @@ const TabNavigator = createBottomTabNavigator(
         )
       })
     },
-    Home: {
-      screen: HomeStack,
-      navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="home" size={tintColor === '#fff' ? 25 : 22} color={tintColor} />
-        )
-      })
-    },
-    Wish: {
-      screen: WishStack,
-      navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="heart" size={tintColor === '#fff' ? 20 : 17} color={tintColor} />
-        )
-      })
-    },
-    Search: {
-      screen: SearchStack,
-      navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="search" size={tintColor === '#fff' ? 20 : 17} color={tintColor} />
-        )
-      })
-    },
+    // Home: {
+    //   screen: HomeStack,
+    //   navigationOptions: () => ({
+    //     tabBarIcon: ({ tintColor }) => (
+    //       <Icon name="home" size={tintColor === '#fff' ? 25 : 22} color={tintColor} />
+    //     )
+    //   })
+    // },
+    // Wish: {
+    //   screen: WishStack,
+    //   navigationOptions: () => ({
+    //     tabBarIcon: ({ tintColor }) => (
+    //       <Icon name="heart" size={tintColor === '#fff' ? 20 : 17} color={tintColor} />
+    //     )
+    //   })
+    // },
+    // Search: {
+    //   screen: SearchStack,
+    //   navigationOptions: () => ({
+    //     tabBarIcon: ({ tintColor }) => (
+    //       <Icon name="search" size={tintColor === '#fff' ? 20 : 17} color={tintColor} />
+    //     )
+    //   })
+    // },
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Movies',
     tabBarOptions: {
       activeTintColor: '#fff',
       inactiveTintColor: 'gray',

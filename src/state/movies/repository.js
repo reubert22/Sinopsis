@@ -4,8 +4,8 @@ import { apiKey } from '../../utils/constants'
 export const getGenres = () =>
   apiClient.get(`/genre/movie/list?api_key=${apiKey}`)
 
-export const getPopular = () =>
-  apiClient.get(`/movie/popular?api_key=${apiKey}&page=1`)
+export const getPopular = page =>
+  apiClient.get(`/movie/popular?api_key=${apiKey}&page=${page}`)
 
 export const getTopRated = () =>
   apiClient.get(`/movie/top_rated?api_key=${apiKey}&page=1`)

@@ -10,6 +10,8 @@ const initialState = {
     isLoading: false,
   },
   popular: {
+    page: 1,
+    totalPages: 0,
     list: [],
     isLoading: false,
   },
@@ -31,6 +33,7 @@ const initialState = {
   },
   selected: {},
   isLoadingTrailer: false,
+  isLoadingMorePopular: false
 };
 
 export const movies = (state = initialState, action) => {
@@ -60,7 +63,12 @@ export const movies = (state = initialState, action) => {
     case types.SUCCESS_GET_POPULAR:
       return {
         ...state,
-        popular: { ...state.popular, list: action.list }
+        popular: {
+          ...state.popular,
+          list: action.object.list,
+          page: action.object.page,
+          totalPages: action.object.totalPages
+        }
       };
     case types.POPULAR_IS_LOADING:
       return {
@@ -127,6 +135,11 @@ export const movies = (state = initialState, action) => {
       return {
         ...state,
         similar: { ...state.similar, isLoading: action.isLoading }
+      };
+    case types.MORE_POPULAR_IS_LOADING:
+      return {
+        ...state,
+        isLoadingMorePopular: action.isLoading
       };
     default:
       return state;

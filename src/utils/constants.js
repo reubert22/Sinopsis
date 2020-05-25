@@ -7,3 +7,10 @@ export const poster500 = 'https://image.tmdb.org/t/p/w500';
 export const backGroundColor = '#282C34'
 export const primaryColor = '#61DAFB'
 export const white = '#FFF'
+
+export const typesMovies = {
+  MOST_POPULAR: 'Most popular',
+  PLAYING_NOW: 'Playing now',
+  TOP_RATED: 'Top rated',
+  UPCOMING: 'Upcoming'
+}

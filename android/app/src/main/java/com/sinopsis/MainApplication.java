@@ -9,6 +9,7 @@ import com.dylanvann.fastimage.FastImageViewPackage;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.ijzerenhein.sharedelement.RNSharedElementPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
           return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNSharedElementPackage(),
             new ReactNativeYouTube(),
             new ReanimatedPackage(),
             new AsyncStoragePackage(),

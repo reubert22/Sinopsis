@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { withNavigationFocus } from "react-navigation";
-import { View, SafeAreaView } from 'react-native';
+import { View, SafeAreaView, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as moviesService from '../../state/movies/service';
@@ -9,7 +9,7 @@ import * as moviesAction from '../../state/movies/actions';
 import Popular from '../../components/shared/Popular';
 import Header from '../../components/shared/Header';
 import Grid from '../../components/shared/Grid';
-import { backGroundColor } from '../../utils/constants';
+import { backGroundColor, typesMovies } from '../../utils/constants';
 
 const MovieScreen = ({
   navigation,
@@ -28,7 +28,11 @@ const MovieScreen = ({
   playingLoading,
   topRatedLoading,
   upcomingLoading,
+  getMorePopular,
+  popularPage,
+  popularTotalPages,
 }) => {
+
   useEffect(() => {
     getPopular();
     getPlaying();
@@ -42,7 +46,9 @@ const MovieScreen = ({
   }
 
   const handleFetchMore = (type) => {
-    console.log('should fetch more: ', type)
+    if (typesMovies.MOST_POPULAR === type) {
+      getMorePopular();
+    }
   }
 
   return (
@@ -57,35 +63,43 @@ const MovieScreen = ({
         />
 
         <Popular
-          title="Most popular"
+          title={typesMovies.MOST_POPULAR}
           isLoading={popularLoading}
           popularList={popularList}
           handleDetails={handleSelectedMovie}
+          handleFetchMore={() => handleFetchMore(typesMovies.MOST_POPULAR)}
+          shouldFetch={popularPage !== popularTotalPages}
         />
 
         <Grid
           data={playingList}
           handleDetails={handleSelectedMovie}
-          fetchMore={() => handleFetchMore('playing')}
-          title="Playing now"
+          fetchMore={() => handleFetchMore(typesMovies.PLAYING_NOW)}
+          title={typesMovies.PLAYING_NOW}
           isLoading={playingLoading}
         />
 
         <Grid
-          title="Top rated"
+          title={typesMovies.TOP_RATED}
           data={topRatedList}
           isLoading={topRatedLoading}
           handleDetails={handleSelectedMovie}
-          fetchMore={() => handleFetchMore('topRated')}
+          fetchMore={() => handleFetchMore(typesMovies.TOP_RATED)}
         />
 
         <Grid
-          title="Upcoming"
+          title={typesMovies.UPCOMING}
           data={upcomingList}
           isLoading={upcomingLoading}
           handleDetails={handleSelectedMovie}
-          fetchMore={() => handleFetchMore('upcoming')}
+          fetchMore={() => handleFetchMore(typesMovies.UPCOMING)}
         />
+
+        <View style={{ alignItems: 'center', justifyContent: 'center', width: '100%', height: 200 }}>
+          <View style={{ width: '95%', height: 200, justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={{ color: '#FFF' }}>Trending movies section</Text>
+          </View>
+        </View>
       </ScrollView>
     </View>
   )
@@ -103,6 +117,8 @@ const mapStateToProps = state => ({
   upcomingLoading: state.movies.upcoming.isLoading,
   latest: state.movies.latest.latest,
   latestLoading: state.movies.latest.isLoading,
+  popularPage: state.movies.popular.page,
+  popularTotalPages: state.movies.popular.totalPages,
 })
 
 const mapDispatchToProps = {
@@ -110,7 +126,9 @@ const mapDispatchToProps = {
   getPlaying: moviesService.getPlaying,
   getTopRated: moviesService.getTopRated,
   getUpcoming: moviesService.getUpcoming,
-  successSelectMovie: moviesAction.successSelectMovie
+  getMorePopular: moviesService.getMorePopular,
+  successSelectMovie: moviesAction.successSelectMovie,
+
 }
 
 export default connect(
