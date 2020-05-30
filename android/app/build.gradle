@@ -191,9 +191,21 @@ android {
 
         }
     }
+
+    packagingOptions {
+       pickFirst '**/armeabi-v7a/libc++_shared.so'
+       pickFirst '**/x86/libc++_shared.so'
+       pickFirst '**/x86_64/libc++_shared.so'
+       pickFirst '**/arm64-v8a/libc++_shared.so'
+       pickFirst '**/libjsc.so'
+    }
 }
 
 dependencies {
+    implementation project(':react-native-gesture-handler')
+    implementation project(':react-native-screens')
+    // Make sure to put android-jsc at the top
+    implementation 'org.webkit:android-jsc:+'
     implementation project(':react-native-shared-element')
     implementation project(':react-native-youtube')
     implementation project(':react-native-reanimated')
@@ -202,6 +214,8 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-fast-image')
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

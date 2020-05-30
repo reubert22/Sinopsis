@@ -9,6 +9,8 @@ import com.dylanvann.fastimage.FastImageViewPackage;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.rnscreens.RNScreensPackage;
 import com.ijzerenhein.sharedelement.RNSharedElementPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.swmansion.reanimated.ReanimatedPackage;
@@ -34,12 +36,13 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
           return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNGestureHandlerPackage(),
+            new RNScreensPackage(),
             new RNSharedElementPackage(),
             new ReactNativeYouTube(),
             new ReanimatedPackage(),
             new AsyncStoragePackage(),
             new VectorIconsPackage(),
-            new RNGestureHandlerPackage(),
             new FastImageViewPackage()
           );
         }
