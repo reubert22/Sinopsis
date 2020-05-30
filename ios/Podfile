@@ -42,6 +42,12 @@ target 'Sinopsis' do
 
   pod 'RCTYouTube', :path => '../node_modules/react-native-youtube'
 
+  pod 'RNSharedElement', :path => '../node_modules/react-native-shared-element'
+
+  pod 'RNScreens', :path => '../node_modules/react-native-screens'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'SinopsisTests' do
     inherit! :search_paths
     # Pods for testing

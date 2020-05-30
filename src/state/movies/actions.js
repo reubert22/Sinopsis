@@ -5,9 +5,9 @@ export const successGetGenres = list => ({
   list,
 });
 
-export const successGetPopular = list => ({
+export const successGetPopular = object => ({
   type: types.SUCCESS_GET_POPULAR,
-  list,
+  object
 });
 
 export const successGetPlaying = list => ({
@@ -84,11 +84,6 @@ export const isLoadingTrailer = isLoadingTrailer => ({
 export const isLoadingSimilar = isLoading => ({
   type: types.SIMILAR_IS_LOADING,
   isLoading
-})
-
-export const successGetMorePopular = list => ({
-  type: types.SUCCESS_GET_MORE_POPULAR,
-  list
 })
 
 export const isLoadingMorePopular = isLoading => ({

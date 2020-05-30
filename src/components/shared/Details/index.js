@@ -37,7 +37,7 @@ const DetailsScreen = ({
   const handleTrailer = () => {
     getTrailer(selected.id, selected.type);
   }
-  console.log('>>>>>> selected', selected)
+
   return (
     <View style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 0, backgroundColor: backGroundColor }} />
@@ -167,7 +167,7 @@ const DetailsScreen = ({
                   fontFamily: 'Avenir'
                 }}
               >
-                Não há nenhum títulos similares.
+                Não há títulos similares.
               </Text>
             )}
       </ScrollView>
