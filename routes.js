@@ -10,6 +10,7 @@ import DetailsScreen from './src/containers/DetailsLinker/index';
 import HomeScreen from './src/containers/Home';
 import MovieScreen from './src/containers/Movies';
 import SerieScreen from './src/containers/Series';
+import SearchScreen from './src/containers/Search';
 
 const transitionConfig = {
   transitionSpec: {
@@ -94,7 +95,7 @@ const WishStack = createSharedElementStackNavigator(createStackNavigator, {
 
 const SearchStack = createSharedElementStackNavigator(createStackNavigator, {
   Search: {
-    screen: HomeScreen,
+    screen: SearchScreen,
   },
   Details: {
     screen: DetailsScreen,
@@ -118,7 +119,7 @@ const TabNavigator = createBottomTabNavigator(
         )
       })
     },
-    Series: {
+    'TV shows': {
       screen: SerieStack,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
@@ -142,14 +143,14 @@ const TabNavigator = createBottomTabNavigator(
     //     )
     //   })
     // },
-    // Search: {
-    //   screen: SearchStack,
-    //   navigationOptions: () => ({
-    //     tabBarIcon: ({ tintColor }) => (
-    //       <Icon name="search" size={tintColor === '#fff' ? 20 : 17} color={tintColor} />
-    //     )
-    //   })
-    // },
+    Search: {
+      screen: SearchStack,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="search" size={tintColor === '#fff' ? 20 : 17} color={tintColor} />
+        )
+      })
+    },
   },
   {
     initialRouteName: 'Movies',
