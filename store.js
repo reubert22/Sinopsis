@@ -7,11 +7,13 @@ import { persistReducer, persistStore } from 'redux-persist'
 import { movies } from './src/state/movies/reducer'
 import { series } from './src/state/series/reducer'
 import { details } from './src/state/details/reducer';
+import { search } from './src/state/search/reducer';
 
 const reducer = combineReducers({
   movies,
   series,
-  details
+  details,
+  search
 });
 
 const enhancer = applyMiddleware(thunk);

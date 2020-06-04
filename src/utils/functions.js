@@ -1,6 +1,6 @@
-export const returnType = (obj, type) => {
-  return obj.map(item => ({
+export const returnType = (obj, type) =>
+  obj.map(item => ({
     ...item,
     type
   }))
-}
+
