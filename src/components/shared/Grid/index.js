@@ -20,7 +20,7 @@ const Grid = ({ data, handleDetails, fetchMore, title, rounded, isLoading }) => 
           data={data}
           horizontal
           style={{ marginLeft: 7, marginBottom: 20, marginTop: 3 }}
-          renderItem={({ item, index }) => (
+          renderItem={({ item, index }) => item.poster_path && (
             <View style={styles.containerItems}>
               <BaseButton
                 style={rounded ? styles.button : styles.buttonImg}

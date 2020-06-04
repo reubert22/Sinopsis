@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BaseButton, ScrollView } from 'react-native-gesture-handler';
 import { View, Text, SafeAreaView, Dimensions } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
@@ -23,6 +23,7 @@ const DetailsScreen = ({
 }) => {
   const index = navigation.getParam('index');
   const selected = navigation.getParam('item');
+  const [shouldPlay, setShouldPlay] = useState(false);
 
   const handleSelectedSimilar = (selectedMovie, index) => {
     resetTrailerId();
@@ -31,19 +32,16 @@ const DetailsScreen = ({
 
   useEffect(() => {
     getSimilar(selected.id, selected.type);
+    getTrailer(selected.id, selected.type);
     return () => resetTrailerId();
   }, []);
-
-  const handleTrailer = () => {
-    getTrailer(selected.id, selected.type);
-  }
 
   return (
     <View style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 0, backgroundColor: backGroundColor }} />
 
-      <View style={{ width: '100%', height: 250 }}>
-        {!isLoadingTrailerId && trailerId ? (
+      <View style={{ width: '100%', height: 300 }}>
+        {!isLoadingTrailerId && trailerId && shouldPlay ? (
           <YouTube
             style={{ alignSelf: 'stretch', width: '100%', height: '100%' }}
             apiKey={REACT_APP_BASE_KEY}
@@ -68,9 +66,9 @@ const DetailsScreen = ({
                   }}
                   resizeMode={FastImage.resizeMode.stretch}
                 >
-                  {!isLoadingTrailerId && (
+                  {!isLoadingTrailerId && trailerId && (
                     <BaseButton
-                      onPress={handleTrailer}
+                      onPress={() => setShouldPlay(true)}
                       style={{
                         width: '100%',
                         height: '100%',
@@ -93,7 +91,7 @@ const DetailsScreen = ({
           )}
       </View>
       <ScrollView style={{ flex: 1, backgroundColor: backGroundColor }}>
-        <View style={{ marginHorizontal: 10 }}>
+        <View style={{ marginTop: 20, marginBottom: 10, marginHorizontal: 10 }}>
 
           <Text numberOfLines={2} style={{ color: '#fff', marginBottom: 10, fontWeight: 'bold', fontSize: 20 }}>
             {selected.type === 'movie'

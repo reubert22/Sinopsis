@@ -112,9 +112,11 @@ const SearchScreen = ({
           </View>
         </View>
         <View style={{ width: '100%', flexDirection: 'row', flexWrap: 'wrap', marginTop: 10, paddingHorizontal: 2, justifyContent: 'center' }}>
-          <View style={{ width: '100%', height: 20, marginBottom: 10 }}>
-            <ItemTitle title={value ? 'Resultado da busca' : 'Resultados da última busca'} />
-          </View>
+          {list.length > 0 && (
+            <View style={{ width: '100%', height: 20, marginBottom: 10 }}>
+              <ItemTitle title={value ? 'Resultado da busca' : 'Resultados da última busca'} />
+            </View>
+          )}
           {list.map((item, index) => item.poster_path && (
             <BaseButton
               key={`search-item-id-${item.id}`}
