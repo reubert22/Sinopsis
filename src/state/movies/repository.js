@@ -10,8 +10,8 @@ export const getPopular = page =>
 export const getTopRated = () =>
   apiClient.get(`/movie/top_rated?api_key=${apiKey}&page=1`)
 
-export const getNowPlaying = () =>
-  apiClient.get(`/movie/now_playing?api_key=${apiKey}&page=1`)
+export const getNowPlaying = page =>
+  apiClient.get(`/movie/now_playing?api_key=${apiKey}&page=${page}`)
 
 export const getUpcoming = () =>
   apiClient.get(`/movie/upcoming?api_key=${apiKey}&page=1`)
