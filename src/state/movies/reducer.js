@@ -6,6 +6,8 @@ const initialState = {
     isLoading: false
   },
   playing: {
+    page: 1,
+    totalPages: 0,
     list: [],
     isLoading: false,
   },
@@ -52,7 +54,12 @@ export const movies = (state = initialState, action) => {
     case types.SUCCESS_GET_PLAYING:
       return {
         ...state,
-        playing: { ...state.playing, list: action.list }
+        playing: {
+          ...state.playing,
+          list: action.object.list,
+          page: action.object.page,
+          totalPages: action.object.totalPages
+        }
       };
     case types.PLAYING_IS_LOADING:
       return {

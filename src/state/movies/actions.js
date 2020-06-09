@@ -10,9 +10,9 @@ export const successGetPopular = object => ({
   object
 });
 
-export const successGetPlaying = list => ({
+export const successGetPlaying = object => ({
   type: types.SUCCESS_GET_PLAYING,
-  list,
+  object,
 });
 
 export const successGetTopRated = list => ({

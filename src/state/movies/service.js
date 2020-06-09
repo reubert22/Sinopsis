@@ -35,12 +35,17 @@ export const getPopular = () => async (dispatch, getState) => {
   }
 }
 
-export const getPlaying = () => async (dispatch) => {
+export const getPlaying = () => async (dispatch, getState) => {
+  const { movies: { playing: { page } } } = getState();
   try {
     dispatch(actions.isLoadingPlaying(true))
-    const response = await repository.getNowPlaying()
+    const response = await repository.getNowPlaying(page)
     const newResponse = returnType(response.data.results, 'movie');
-    dispatch(actions.successGetPlaying(newResponse))
+    dispatch(actions.successGetPlaying({
+      list: newResponse,
+      page: response.data.page,
+      totalPages: response.data.total_pages
+    }))
     dispatch(actions.isLoadingPlaying(false))
   } catch (e) {
     dispatch(actions.isLoadingPlaying(false))
@@ -109,5 +114,23 @@ export const getMorePopular = () => async (dispatch, getState) => {
     dispatch(actions.isLoadingMorePopular(false))
   } catch (e) {
     dispatch(actions.isLoadingMorePopular(false))
+  }
+}
+
+export const getMorePlaying = () => async (dispatch, getState) => {
+  const { movies: { playing: { page, totalPages, list } } } = getState();
+  try {
+    dispatch(actions.isLoadingPlaying(true))
+    const response = await repository.getPopular(page !== totalPages ? page + 1 : page);
+    const newResponse = returnType(response.data.results, 'movie');
+    const updatedList = [...list, ...newResponse];
+    dispatch(actions.successGetPlaying({
+      list: updatedList,
+      page: response.data.page,
+      totalPages: response.data.total_pages
+    }))
+    dispatch(actions.isLoadingPlaying(false))
+  } catch (e) {
+    dispatch(actions.isLoadingPlaying(false))
   }
 }
